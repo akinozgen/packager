@@ -1,0 +1,10 @@
+{
+	"packages": {
+		"npp": {
+			"name": "Notepad++",
+			"version": "6.9.0",
+			"provider": "Notepad++Team",
+			"website": "https://notepad-plus-plus.org/"
+		}
+	}
+}

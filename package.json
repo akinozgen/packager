@@ -1,0 +1,22 @@
+{
+  "name": "packager",
+  "version": "0.0.1",
+  "description": "A package manager for windows software",
+  "main": "packager.js",
+  "scripts": {
+    "test": "node packager.js"
+  },
+  "author": "Akın Özgen <akinozgen17@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "easy-table": "^1.0.0",
+    "jsonfile": "^2.4.0",
+    "read-json": "^1.0.3",
+    "require-folder-tree": "^1.4.5",
+    "write": "^0.3.2",
+    "write-json": "^0.2.2",
+    "zip": "^1.2.0"
+  }
+}
