@@ -3,6 +3,12 @@ Packager Windows Paket Yöneticisi 0.0.1
 
 Packager sayesinde GNU/Linux tabanlı sistemlerde kullanılan paket yönetimi ile programlarınızı buradan yönetebileceksiniz.
 
+Aktif Özellikler
+----------------
+1. Liste güncelleme
+2. Kaldırma
+3. Listeleme
+
 Kullanımı
 ---------
 >Not: Güncelleme işlemi için updateRepositories.js dosyasındaki url değişkeninin düzenlenmesi gerekmektedir. Sunucu dosyaları ana dizindeki server içindedir.
