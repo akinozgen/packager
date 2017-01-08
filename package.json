@@ -12,11 +12,11 @@
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "easy-table": "^1.0.0",
+    "fstream": "^1.0.10",
     "jsonfile": "^2.4.0",
     "read-json": "^1.0.3",
     "require-folder-tree": "^1.4.5",
     "write": "^0.3.2",
-    "write-json": "^0.2.2",
-    "zip": "^1.2.0"
+    "write-json": "^0.2.2"
   }
 }
