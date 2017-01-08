@@ -1,9 +1,23 @@
 const fs = require('fs');
-const write = require('write');
+const jsonFile = require('jsonfile');
 
+var installPackage = {
+    check: function (code)
+    {
 
-var installPackage = function() {
+    },
+    download: function(code)
+    {
 
-}
+    },
+    install: function(code)
+    {
+
+    },
+    batch: function(code)
+    {
+        
+    }
+};
 
 module.exports = installPackage;
