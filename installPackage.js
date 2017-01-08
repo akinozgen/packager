@@ -1,5 +1,4 @@
 const fs = require('fs');
-const jsonFile = require('jsonfile');
 
 var installPackage = {
     check: function (code)
