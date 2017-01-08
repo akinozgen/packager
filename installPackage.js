@@ -2,6 +2,7 @@ const fs = require('fs');
 const http = require('http');
 const unzip = require('unzip');
 const fstream = require('fstream');
+const jsonFile = require('jsonfile');
 
 var installPackage = {
     check: function (code)
@@ -31,19 +32,32 @@ var installPackage = {
             console.log("Devam Ediyor: ".blue, package.name + " paketi geçici dizine indiriliyor.", des);
             response.on('end', function () {
                 console.log('Başarılı: '.green, package.name + " paketi geçici dizine indirildi.", des);
-                installPackage.install(des, process.env.PROGRAMS + '\\' + code);
+                installPackage.unzip(des, process.env.PROGRAMS + '\\' + code);
+                installPackage.register(code);
                 console.log('Başarılı: '.green, 'Paket kuruldu.');
             });
         });
     },
-    install: function(source, path)
+    unzip: function(source, path)
     {
-        fs.mkdirSync(path);
+        if ( ! fs.existsSync(path))
+            fs.mkdirSync(path);
+
         var read  = fs.createReadStream(source);
         var write = fstream.Writer(path);
 
         read.pipe(unzip.Parse()).pipe(write);
     },
+    register: function (code)
+    {
+        var latest = jsonFile.readFileSync('./latest.json');
+        var installed = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json');
+        installed.packages[code] = latest.packages[code];
+        installed.packages[code]['installation_path'] = process.env.PROGRAMS + '\\' + code;
+
+        jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', installed);
+    },
+
     batch: function(code)
     {
         var package = installPackage.check(code);

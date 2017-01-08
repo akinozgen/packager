@@ -25,7 +25,7 @@ var removePackages = {
                     }
                     else
                     {
-                        exec("rmdir /Q /S " + path, function (err, stdout, stderr) {
+                        exec("rmdir /Q /S " + '"' + path + '"', function (err, stdout, stderr) {
                             if (err) {
                                 console.error('\nHata: '.red, 'Sistem belirtilen konumu bulamıyor >', path);
                                 return;
