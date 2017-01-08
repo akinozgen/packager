@@ -6,7 +6,7 @@
 			"provider": "Notepad++Team",
 			"website": "https://notepad-plus-plus.org/",
 			"versions": {
-				"6.9.0": "https://notepad-plus-plus.org/repository/7.x/7.3/npp.7.3.bin.zip"
+				"6.9.0": "http://notepad-plus-plus.org/repository/7.x/7.3/npp.7.3.bin.zip"
 			}
 		}
 	}
