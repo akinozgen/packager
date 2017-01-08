@@ -8,13 +8,13 @@ module.exports = function init () {
         fs.mkdirSync(localPath, 0777);
 
 	process.env['PROGRAMS'] = localPath;
-	
+
 	var installed = function () {
 		if (fs.existsSync(localPath + '\\installed.json')) {
             return jsonfile.readFileSync(localPath + '\\installed.json');
 		} else {
-			jsonfile.writeFileSync(localPath + '\\installed.json', {});
-            return {};
+			jsonfile.writeFileSync(localPath + '\\installed.json', {"packages": {}});
+            return {"packages": {}};
         }
 	};
 
