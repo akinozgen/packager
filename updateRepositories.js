@@ -9,6 +9,7 @@ var updateRepositories = function()
 	var file = fs.createWriteStream("./latest.json");
 	var request = http.get(url, function(response) {
 		response.pipe(file);
+		console.log("\nBaşarılı: ".green, "Depo Güncellendi");
 	});
 }
 
