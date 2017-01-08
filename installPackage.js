@@ -1,6 +1,5 @@
 const fs = require('fs');
 const jsonFile = require('jsonfile');
-const updateRepositories = require('./updateRepositories');
 
 var installPackage = {
     check: function (code)
