@@ -6,11 +6,11 @@ var packageWhere = function (code) {
     if (packages[code])
     {
         var requested = packages[code];
-        console.log(requested.name + " paketinin kurulu olduğu dizin: ", requested.installation_path);
+        console.log('\n' + requested.name + ' paketinin kurulu olduğu dizin: ', requested.installation_path);
     }
     else
     {
-        console.log("Uyarı".yellow, "Belirtilen paket zaten kurulu değil.");
+        console.log("\nUyarı".yellow, "Belirtilen paket zaten kurulu değil.");
     }
 
 }
