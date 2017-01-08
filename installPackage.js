@@ -1,4 +1,5 @@
 const fs = require('fs');
+const http = require('http');
 
 var installPackage = {
     check: function (code)
@@ -7,7 +8,7 @@ var installPackage = {
         try {
             var latest = JSON.parse(file);
             if (typeof latest.packages[code] != 'undefined')
-                return latest.packages[code].version;
+                return latest.packages[code];
             else return false;
         }
         catch (e)
@@ -15,9 +16,9 @@ var installPackage = {
             console.log('Hata: '.red, 'Depo dosyanız bozuk. \'packager guncelle\' komutu ile düzeltin.');
         }
     },
-    download: function(code)
+    download: function(package)
     {
-
+        var url =
     },
     install: function(code)
     {
@@ -25,12 +26,14 @@ var installPackage = {
     },
     batch: function(code)
     {
-        var checking = installPackage.check(code);
-        if (checking)
-            console.log('\nBaşarılı: '.green, code + ' paketi bulundu. Son sürüm: ', checking);
+        var package = installPackage.check(code);
+        if (package)
+        {
+            console.log('\nBaşarılı: '.green, code + ' paketi bulundu. Son sürüm: ', package.version);
+        }
         else
         {
-            if (checking == false)
+            if (package == false)
                 console.log('\nUyarı: '.yellow, code + ' paketi bulunamadı. Kodu doğru yazdığınızdan veya deponuzun güncel olduğundan emin olun.');
         }
     }
