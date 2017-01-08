@@ -1,5 +1,7 @@
 const fs = require('fs');
 const http = require('http');
+const unzip = require('unzip');
+const fstream = require('fstream');
 
 var installPackage = {
     check: function (code)
@@ -16,48 +18,40 @@ var installPackage = {
             console.log('Hata: '.red, 'Depo dosyanız bozuk. \'packager guncelle\' komutu ile düzeltin.');
         }
     },
-    download: function(package, version)
+    download: function(package, version, code)
     {
         var state = false;
         var url = package.versions[version];
         var des = (process.env.TEMP + '\\' + package.name + '-' + version + '.zip');
 
         var file = fs.createWriteStream(des);
+
         var request = http.get(url, function (response) {
             response.pipe(file);
             console.log("Devam Ediyor: ".blue, package.name + " paketi geçici dizine indiriliyor.", des);
             response.on('end', function () {
                 console.log('Başarılı: '.green, package.name + " paketi geçici dizine indirildi.", des);
+                installPackage.install(des, process.env.PROGRAMS + '\\' + code);
+                console.log('Başarılı: '.green, 'Paket kuruldu.');
             });
         });
-
-        if (fs.existsSync(des))
-            state = true;
-
-        return {
-            "path": des,
-            "state": state
-        };
     },
-    install: function(code)
+    install: function(source, path)
     {
+        fs.mkdirSync(path);
+        var read  = fs.createReadStream(source);
+        var write = fstream.Writer(path);
 
+        read.pipe(unzip.Parse()).pipe(write);
     },
     batch: function(code)
     {
         var package = installPackage.check(code);
         if (package)
         {
-            var download = installPackage.download(package, package.version);
-            console.log('\nBaşarılı: '.green, code + ' paketi bulundu. Son sürüm: ', package.version);
-            if (download.state)
-            {
-                //kur
-            }
-            else
-            {
-                console.log('Hata: '.red, 'Dosya indirilemedi. İnternet bağlantınızı kontrol edip tekrar deneyin.');
-            }
+            console.log('Başarılı: '.green, ' Paket bulundu. Sürüm: ', package.version);
+            var download = installPackage.download(package, package.version, code);
+
         }
         else
         {
