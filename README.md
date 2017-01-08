@@ -8,6 +8,8 @@ Aktif Özellikler
 1. Liste güncelleme
 2. Kaldırma
 3. Listeleme
+5. Kurulum
+6. Nerede özelliği
 
 Kullanımı
 ---------
@@ -27,8 +29,7 @@ nerede [paket_kodu]  İstenilen Paketin Kurulum Dizinini Gösterir.
 
 İleride Eklenecekler
 ====================
-
-1. Paket Kurulumu
-2. Paket Kurulum Dizini Sorgulama
+1. Spesifik sürüm belirtme
+2. URI protokol ile programlar 'packager://calistir/npp' örneğindeki gibi çalıştırılacak ve kısayollar internet kısayolu formatında olacak (Steam gibi)
 3. Paket Kurulumuna Kurulacak Dizini Belirtme
 4. Aktif Sunucu (PHP)
