@@ -4,10 +4,17 @@ const jsonFile = require('jsonfile');
 var installPackage = {
     check: function (code)
     {
-        var latest = jsonFile.readFile('./latest.json', function(err) {
-            if (String(err).indexOf('Unexpected end of JSON input') > -1)
-                console.log('Hata: '.red, "Yerel depo dosyası bozuk. 'packager guncelle' komutu ile düzeltin.");
-        });
+        var file = fs.readFileSync('latest.json');
+        try {
+            var latest = JSON.parse(file);
+            if (typeof latest.packages[code] != 'undefined')
+                return latest.packages[code].version;
+            else return false;
+        }
+        catch (e)
+        {
+            console.log('Hata: '.red, 'Depo dosyanız bozuk. \'packager guncelle\' komutu ile düzeltin.');
+        }
     },
     download: function(code)
     {
@@ -21,8 +28,11 @@ var installPackage = {
     {
         var checking = installPackage.check(code);
         if (checking)
-        {
             console.log('\nBaşarılı: '.green, code + ' paketi bulundu. Son sürüm: ', checking);
+        else
+        {
+            if (checking == false)
+                console.log('\nUyarı: '.yellow, code + ' paketi bulunamadı. Kodu doğru yazdığınızdan veya deponuzun güncel olduğundan emin olun.');
         }
     }
 };
