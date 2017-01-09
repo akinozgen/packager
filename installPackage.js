@@ -5,6 +5,16 @@ const fstream = require('fstream');
 const jsonFile = require('jsonfile');
 
 var installPackage = {
+    checkExists: function (code)
+    {
+        var installed = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json');
+        var packages = installed.packages;
+
+        if (typeof packages[code] != 'undefined')
+            return false;
+        else
+            return true;
+    },
     check: function (code)
     {
         var file = fs.readFileSync('latest.json');
@@ -61,16 +71,18 @@ var installPackage = {
     batch: function(code)
     {
         var package = installPackage.check(code);
-        if (package)
+        var check = installPackage.checkExists(code);
+        if (package && check)
         {
             console.log('Başarılı: '.green, ' Paket bulundu. Sürüm: ', package.version);
             var download = installPackage.download(package, package.version, code);
-
         }
         else
         {
             if (package == false)
                 console.log('\nUyarı: '.yellow, code + ' paketi bulunamadı. Kodu doğru yazdığınızdan veya deponuzun güncel olduğundan emin olun.');
+            else
+                console.log('\nUyarı: '.yellow, 'Bu paket zaten kurulu.');
         }
     }
 };
