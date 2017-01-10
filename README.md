@@ -18,13 +18,13 @@ Kullanımı
 
 ```
 Usage: packager [options]
--h, --help                                output usage information
--V, --version                             output the version number
-guncelle                                  Paket Listesini Günceller.
-kur [paket_kodu, kurulacak_dizin, sürüm]  Belirtilen Paketi Kurar.
-kaldir [paket_kodu]                       Belirtilen Paketi Kaldırır.
-listele                                   Kurulu Paketleri Gösterir.
-nerede [paket_kodu]                       İstenilen Paketin Kurulum Dizinini Gösterir.
+-h, --help                                 output usage information
+-V, --version                              output the version number
+guncelle                      [            Paket Listesini Günceller.
+kur [paket_kodu[, kurulacak_dizin, sürüm]] Belirtilen Paketi Kurar.
+kaldir [paket_kodu]                        Belirtilen Paketi Kaldırır.
+listele                                    Kurulu Paketleri Gösterir.
+nerede [paket_kodu]                        İstenilen Paketin Kurulum Dizinini Gösterir.
 ```
 
 İleride Eklenecekler
