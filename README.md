@@ -8,7 +8,7 @@ Aktif Özellikler
 1. Liste güncelleme
 2. Kaldırma
 3. Listeleme
-5. Kurulum
+5. Kurulum (özel dizin belirtme)
 6. Nerede özelliği
 
 Kullanımı
