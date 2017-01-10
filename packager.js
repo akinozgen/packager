@@ -14,7 +14,7 @@ var installed = require('./init')();
 
 program.version(pkg.version)
     .option('guncelle', 'Paket Listesini Günceller.', updateRepositories)// Done
-    .option('kur [paket_kodu]', 'Belirtilen Paketi Kurar.', installPackage.batch)
+    .option('kur [paket_kodu] [kurulacak_dizin] [sürüm]', 'Belirtilen Paketi Kurar.', installPackage.batch)
     .option('kaldir [paket_kodu]', 'Belirtilen Paketi Kaldırır.', removePackages.remove) // Done
     .option('listele', 'Kurulu Paketleri Gösterir.', getInstalledPackages) // Done
     .option('nerede [paket_kodu]', 'İstenilen Paketin Kurulum Dizinini Gösterir.', packageWhere)

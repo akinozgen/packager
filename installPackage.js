@@ -5,6 +5,9 @@ const fstream = require('fstream');
 const jsonFile = require('jsonfile');
 
 var installPackage = {
+
+    destination: typeof process.argv[4] != 'undefined' ? process.argv[4] : (process.env.PROGRAMS + '\\'),
+
     checkExists: function (code)
     {
         var installed = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json');
@@ -42,14 +45,16 @@ var installPackage = {
             console.log("Devam Ediyor: ".blue, package.name + " paketi geçici dizine indiriliyor.", des);
             response.on('end', function () {
                 console.log('Başarılı: '.green, package.name + " paketi geçici dizine indirildi.", des);
-                installPackage.unzip(des, process.env.PROGRAMS + '\\' + code);
+                installPackage.unzip(des, code);
                 installPackage.register(code);
                 console.log('Başarılı: '.green, 'Paket kuruldu.');
             });
         });
     },
-    unzip: function(source, path)
+    unzip: function(source, code)
     {
+        var path = (installPackage.destination + '\\' + code);
+
         if ( ! fs.existsSync(path))
             fs.mkdirSync(path);
 
@@ -63,7 +68,7 @@ var installPackage = {
         var latest = jsonFile.readFileSync('./latest.json');
         var installed = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json');
         installed.packages[code] = latest.packages[code];
-        installed.packages[code]['installation_path'] = process.env.PROGRAMS + '\\' + code;
+        installed.packages[code]['installation_path'] = installPackage.destination + '\\' + code;
 
         jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', installed);
     },
@@ -85,6 +90,7 @@ var installPackage = {
                 console.log('\nUyarı: '.yellow, 'Bu paket zaten kurulu.');
         }
     }
+
 };
 
 module.exports = installPackage;
