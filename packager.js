@@ -5,12 +5,12 @@ const program = require('commander');
 const pkg = require('./package.json');
 
 // My Modules
-const updateRepositories = require('./updateRepositories');
-const packageWhere = require('./packageWhere');
-const installPackage = require('./installPackage');
-const getInstalledPackages = require('./getInstalledPackages');
-const removePackages = require('./removePackages.js');
-var installed = require('./init')();
+const updateRepositories = require('./modules/updateRepositories');
+const packageWhere = require('./modules/packageWhere');
+const installPackage = require('./modules/installPackage');
+const getInstalledPackages = require('./modules/getInstalledPackages');
+const removePackages = require('./modules/removePackages.js');
+var installed = require('./modules/init')();
 
 program.version(pkg.version)
     .option('guncelle', 'Paket Listesini Günceller.', updateRepositories)// Done
