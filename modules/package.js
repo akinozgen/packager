@@ -1,4 +1,5 @@
 const fs = require('fs')
+const exec = require('child_process').exec;
 const http = require('http')
 const unzip = require('unzip')
 const fstream = require('fstream')
@@ -15,7 +16,7 @@ var package = function (code, fromWhere, toWhere) {
     this.latest            = jsonFile.readFileSync('./latest.json')
     this.installed         = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json')
 
-    if (fromWhere == 'repo')
+    if (fromWhere == 'remote')
     {
         if (typeof this.latest.packages[code] != 'undefined')
         {
@@ -66,13 +67,15 @@ var package = function (code, fromWhere, toWhere) {
         var file      = fs.createWriteStream(temporary)
 
         var request   = http.get(url, function (response) {//Request Begin
+            callback('Uzak sunucu isteği kabul etti. İndirme başlıyor'.green)
             response.pipe(file)
-            callback("Devam Ediyor: ".blue, package.name + " paketi geçici dizine indiriliyor.")
+            callback((this.name + " geçici dizine indiriliyor.").cyan)
 
             response.on('end', function () {
-                callback('Başarılı: '.green, package.name + " paketi geçici dizine indirildi.")
+                callback((this.name + " geçici dizine indirildi.").green)
 
                 // Unzip Begin
+                callback('Arşivden çıkartılmaya başlandı.'.cyan)
                 if ( ! fs.existsSync(this.installation_path) )
                     fs.mkdirSync(this.installation_path)
 
@@ -80,17 +83,37 @@ var package = function (code, fromWhere, toWhere) {
                 var write = fstream.Writer(this.installation_path)
 
                 read.pipe(unzip.Parse()).pipe(write)
+                callback('Arşivden çıkartma başarılı.'.green)
                 // Unzip End | Register Begin
+                callback('Yeni paket yerel depoya kayıt ediliyor.'.cyan)
                 this.installed.packages[code] = this.latest.packages[code]
                 this.installed.packages[code]['installation_path'] = this.installation_path
                 // console.log(this.installed)
                 jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', this.installed)
                 // Register End
-                callback("Başarılı: ".green, 'Belirtilen paket kuruldu.')
-
-                callback('done') // Done
+                callback('Kayıt işlemi tamamlandı ve belirtilen paket kuruldu.'.green)
             }.bind(this))
+
         }.bind(this))// Request End
+    }
+
+    this.remove = function (callback)
+    {
+        if (fs.existsSync(this.installation_path))
+            exec('rmdir /s /q "' + this.installation_path + '"', function () {
+                callback('Yerel dosyalar silindi.'.green)
+
+                delete this.installed.packages[code]
+                jsonFile.writeFile(process.env.PROGRAMS + '\\installed.json', this.installed, function (err) {
+                    if (err)
+                        callback(err)
+                    else
+                        callback('Yerel depodan kaldırıldı.'.green)
+                }.bind(this))
+
+            }.bind(this))
+        else
+            callback('Yerel dosyalar bulunamadı.'.red)
     }
 
 }

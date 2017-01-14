@@ -2,31 +2,32 @@ const Package = require('./package');
 
 var installPackage = function (code) {
     console.log('\r');
+    require('log-timestamp')
 
     var version     = typeof process.argv[5] != 'undefined' ? process.argv[5] : undefined
     var destination = typeof process.argv[4] != 'undefined' ? process.argv[4] : undefined
 
-    var pack = new Package(code, 'repo', destination)
+    var pack = new Package(code, 'remote', destination)
 
     if ( ! pack.isExists())
     {
-        console.log('Hata: '.red, 'Böyle bir paket bulunamadı.')
+        console.log('Böyle bir paket bulunamadı.'.yellow)
         process.exit(1)
+    }
+    else
+    {
+        console.log('Paket bulundu. Kurulum birazdan başlayacak'.green)
     }
 
     if (pack.isInstalled())
     {
-        console.log('Uyarı: '.yellow, 'Bu paket zaten kurulmuş.')
+        console.log('Bu paket zaten kurulmuş.'.yellow)
         process.exit(1)
     }
 
-    pack.downloadAndInstall(function (title, mes) {
-        console.log(title, mes)
-        if (title == 'done')
-            process.exit(1)
+    pack.downloadAndInstall(function (message) {
+        console.log(message)
     })
-
-    // console.log('bunu okuyorsan herşey yolunda demektir');
 };
 
 module.exports = installPackage;

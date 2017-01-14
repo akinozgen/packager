@@ -16,9 +16,7 @@ var installed = require('./modules/init')();
 program.version(pkg.version)
     .option('guncelle', 'Paket Listesini Günceller.', updateRepositories)// Done
     .option('kur [paket_kodu] [kurulacak_dizin] [sürüm]', 'Belirtilen Paketi Kurar.', installPackage)
-    .option('kaldir [paket_kodu]', 'Belirtilen Paketi Kaldırır.', removePackages.remove) // Done
+    .option('kaldir [paket_kodu]', 'Belirtilen Paketi Kaldırır.', removePackages) // Done
     .option('listele', 'Kurulu Paketleri Gösterir.', getInstalledPackages) // Done
     .option('nerede [paket_kodu]', 'İstenilen Paketin Kurulum Dizinini Gösterir.', packageWhere)
-    .parse(process.argv);//End Program Functions
-
-var npp = new Package('npp', 'repo');
+.parse(process.argv);//End Program Functions
