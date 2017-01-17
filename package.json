@@ -1,11 +1,13 @@
 {
   "name": "packager",
   "version": "0.0.0",
-  "description": "A package manager for windows software",
+  "description": "Windows için apt tarzı paket yöneticisi | Apt style package manager for windows",
   "main": "packager.js",
   "scripts": {
     "test": "node packager.js"
   },
+  "repository": "https://github.com/AknOzgen/packager.git",
+  "website": "https://github.com/AknOzgen/packager",
   "author": "Akın Özgen <akinozgen17@outlook.com>",
   "license": "MIT",
   "dependencies": {
