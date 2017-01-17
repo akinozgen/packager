@@ -1,7 +1,7 @@
-Packager Windows Paket Yöneticisi 0.0.1
+Packager Windows Paket Yöneticisi
 =================================
 
-Packager sayesinde GNU/Linux tabanlı sistemlerde kullanılan paket yönetimi ile windows programlarınızı buradan yönetebileceksiniz.
+Packager sayesinde GNU/Linux tabanlı sistemlerde kullanılan paket yönetimi mantığı ile windows programlarınızı buradan yönetebileceksiniz.
 
 Aktif Özellikler
 ----------------
@@ -10,6 +10,8 @@ Aktif Özellikler
 3. Listeleme
 5. Kurulum (özel dizin belirtme, özel sürüm belirtme)
 6. Nerede özelliği
+7. Kurulabilecek paketleri listeleme
+8. İstenilen paketin sürümlerini listeleme
 
 17.01.2017 - Eklenen Özellikler
 -------------------------------
@@ -31,7 +33,7 @@ Aktif Özellikler
 
 Kullanımı
 ---------
->Not: Güncelleme işlemi için updateRepositories.js dosyasındaki url değişkeninin düzenlenmesi gerekmektedir. Sunucu dosyaları ana dizindeki server içindedir.
+>Not: Güncelleme işlemi için updateRepositories.js dosyasındaki url değişkeninin düzenlenmesi gerekmektedir. Sunucu dosyaları ana dizindeki server içindedir. İndirmeler için de uzak sunucu dosyaları içindeki packages.json dosyasındaki bazı url strignlerinin değiştirilmesi gerekebilir...
 
 
 ```
@@ -49,9 +51,8 @@ surumler [code]                            Belirtilen paketin sürümlerini list
 
 İleride Eklenecekler
 ====================
-1. Modules/ dizini içindeki modüllerin dosya hali yerine npm modülü gibi alt bir klasör ve kendilerine ait bağımlılıkların bu klasörlerde toplanması
+1. Aktif Sunucu (PHP)
 2. URI protokol ile programlar 'packager://calistir/npp' örneğindeki gibi çalıştırılacak ve kısayollar internet kısayolu formatında olacak (Steam gibi)
-3. Aktif Sunucu (PHP)
 
 Demo Kurulum Yönergeleri
 ------------------------
