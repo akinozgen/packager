@@ -5,6 +5,7 @@ const unzip = require('unzip')
 const fstream = require('fstream')
 const jsonFile = require('jsonfile')
 const progress = require('request-progress');
+const ProgressBar = require('progress');
 
 var package = function (code, fromWhere, toWhere) {
 
@@ -67,39 +68,53 @@ var package = function (code, fromWhere, toWhere) {
         var temporary = (process.env.TEMP + '\\' + this.name + '-' + this.version + '.zip')
         var file      = fs.createWriteStream(temporary)
 
-        progress(request(url), {})
-            .on('response', function (response) {
-                callback(('Uzak sunucu isteği kabul etti. Kod: ' + response.statusCode).green)
-                callback((this.name + " geçici dizine indiriliyor.").cyan)
-            }.bind(this))
-            .on('progress', function (state) {
-                callback(state)
+        var req = progress(request.get(url), {})
+        req.on('response', function (response) {
+            callback(('Uzak sunucu isteği kabul etti. Kod: ' + response.statusCode).green)
+            callback((this.name + " geçici dizine indiriliyor.").cyan)
+
+            var len = parseInt(response.headers['content-length'], 10)
+
+            var bar = new ProgressBar('İndiriliyor [:bar] :percent :etas', {
+                complete: '#',
+                incomplete: '-',
+                width: '60',
+                total: len
             })
-            .on('error', function (err) {
-                callback(('Bağlantı Hatası. Hata kodu: ' + err.code).red)
+            
+            response.on('data', function (data) {
+                bar.tick(data.length)
             })
-            .on('end', function () {
-                callback((this.name + " geçici dizine indirildi.").green)
+        }.bind(this))
 
-                // Unzip Begin
-                callback('Arşivden çıkartılmaya başlandı.'.cyan)
-                if ( ! fs.existsSync(this.installation_path) )
-                    fs.mkdirSync(this.installation_path)
+        req.on('progress', function (state) {
+            //callback(state)
+        })
+        req.on('error', function (err) {
+            callback(('Bağlantı Hatası. Hata kodu: ' + err.code).red)
+        })
+        req.on('end', function () {
+            callback((this.name + " geçici dizine indirildi.").green)
 
-                var read  = fs.createReadStream(temporary)
-                var write = fstream.Writer(this.installation_path)
+            // Unzip Begin
+            callback('Arşivden çıkartılmaya başlandı.'.cyan)
+            if ( ! fs.existsSync(this.installation_path) )
+                fs.mkdirSync(this.installation_path)
 
-                read.pipe(unzip.Parse()).pipe(write)
-                callback('Arşivden çıkartma başarılı.'.green)
-                // Unzip End | Register Begin
-                callback('Yeni paket yerel depoya kayıt ediliyor.'.cyan)
-                this.installed.packages[code] = this.latest.packages[code]
-                this.installed.packages[code]['installation_path'] = this.installation_path
-                // console.log(this.installed)
-                jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', this.installed)
-                // Register End
-                callback('Kayıt işlemi tamamlandı ve belirtilen paket kuruldu.'.green)
-            }.bind(this)).pipe(file)
+            var read  = fs.createReadStream(temporary)
+            var write = fstream.Writer(this.installation_path)
+
+            read.pipe(unzip.Parse()).pipe(write)
+            callback('Arşivden çıkartma başarılı.'.green)
+            // Unzip End | Register Begin
+            callback('Yeni paket yerel depoya kayıt ediliyor.'.cyan)
+            this.installed.packages[code] = this.latest.packages[code]
+            this.installed.packages[code]['installation_path'] = this.installation_path
+            // console.log(this.installed)
+            jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', this.installed)
+            // Register End
+            callback('Kayıt işlemi tamamlandı ve belirtilen paket kuruldu.'.green)
+        }.bind(this)).pipe(file)
     }
 
     this.remove = function (callback)
