@@ -4,7 +4,6 @@ const request = require('request')
 const unzip = require('unzip')
 const fstream = require('fstream')
 const jsonFile = require('jsonfile')
-const progress = require('request-progress');
 const ProgressBar = require('progress');
 
 var package = function (code, fromWhere, toWhere) {
@@ -68,7 +67,7 @@ var package = function (code, fromWhere, toWhere) {
         var temporary = (process.env.TEMP + '\\' + this.name + '-' + this.version + '.zip')
         var file      = fs.createWriteStream(temporary)
 
-        var req = progress(request.get(url), {})
+        var req = request.get(url)
         req.on('response', function (response) {
             callback(('Uzak sunucu isteği kabul etti. Kod: ' + response.statusCode).green)
             callback((this.name + " geçici dizine indiriliyor.").cyan)
@@ -81,15 +80,16 @@ var package = function (code, fromWhere, toWhere) {
                 width: '60',
                 total: len
             })
-            
+
             response.on('data', function (data) {
-                bar.tick(data.length)
+                try {
+                    bar.tick(data.length)
+                } catch (err) {
+                    callback(('Bağlantı hatası. Hata Kodu: ' + err).red)
+                    process.exit(1)
+                }
             })
         }.bind(this))
-
-        req.on('progress', function (state) {
-            //callback(state)
-        })
         req.on('error', function (err) {
             callback(('Bağlantı Hatası. Hata kodu: ' + err.code).red)
         })

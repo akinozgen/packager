@@ -17,7 +17,6 @@
     "log-timestamp": "^0.1.2",
     "progress": "^1.1.8",
     "request": "^2.79.0",
-    "request-progress": "^3.0.0",
     "require-folder-tree": "^1.4.5",
     "unzip": "^0.1.11",
     "write": "^0.3.2",
