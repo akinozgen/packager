@@ -15,6 +15,8 @@ Aktif Özellikler
 -------------------------------
 1. İndirime sırasında indirme durumunu göstermek için progress bar eklendi.
 2. Spesifik sürüm belirtme eklendi.
+3. Kurulabilecek paketler komutu eklendi.
+4. Kurulabilecek paketler ve kurulumuş paketleri komutlarının çıktılarına paket kodu sütunu eklendi.
 
 
 14.01.2017 - Eklenen Özellikler
@@ -48,7 +50,7 @@ nelervar                                   Kurulabilecek paketleri gösterir.
 1. Modules/ dizini içindeki modüllerin dosya hali yerine npm modülü gibi alt bir klasör ve kendilerine ait bağımlılıkların bu klasörlerde toplanması
 2. URI protokol ile programlar 'packager://calistir/npp' örneğindeki gibi çalıştırılacak ve kısayollar internet kısayolu formatında olacak (Steam gibi)
 3. Aktif Sunucu (PHP)
-4. Kurulabilecek paketleri listeleme
+4. Kurulabilecek paketler komutu gibi belirtilen paket için sürümleri gösterme özelliği
 
 Demo Kurulum Yönergeleri
 ------------------------
