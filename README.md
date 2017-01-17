@@ -11,6 +11,11 @@ Aktif Özellikler
 5. Kurulum (özel dizin belirtme)
 6. Nerede özelliği
 
+17.01.2017 - Eklenen Özellikler
+-------------------------------
+1. İndirime sırasında indirme durumunu göstermek için progress bar eklendi.
+
+
 14.01.2017 - Eklenen Özellikler
 ----------------------------
 1. Package isminde tekil paket için özel nesne sınıfı eklendi.
