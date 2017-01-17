@@ -7,6 +7,7 @@ const pkg     = require('./package.json');
 // My Modules
 var installed = require('./modules/init')();
 const Package = require('./modules/package');
+const getVersions    = require('./modules/getVersions');
 const packageWhere   = require('./modules/packageWhere');
 const showPackages   = require('./modules/showPackages');
 const installPackage = require('./modules/installPackage');
@@ -21,4 +22,5 @@ program.version(pkg.version)
     .option('listele', 'Kurulu paketleri gösterir.', getInstalledPackages) // Done
     .option('nerede [paket_kodu]', 'İstenilen paketin kurulum dizinini gösterir.', packageWhere)
     .option('nelervar', 'Kurulabilecek paketleri gösterir.', showPackages)
+    .option('surumler [code]', 'Belirtilen paketin sürümlerini ve açıklamalarını gösterir', getVersions)
 .parse(process.argv);//End Program Functions
