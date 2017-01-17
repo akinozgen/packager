@@ -4,7 +4,7 @@ const http = require('http');
 var updateRepositories = function()
 {
 	var url = "http://projects.app/packager/server/packages/packages.json";
-	var file = fs.createWriteStream("../latest.json");
+	var file = fs.createWriteStream("./latest.json");
 
 	http.get({ host: 'projects.app', port: 80 }, function (res) {
 		if (res.statusCode == 200)
@@ -16,7 +16,7 @@ var updateRepositories = function()
 		}
 		else
 		{
-			console.log('Hata: '.red, 'Sunucya bağlanılamadı. İnternet bağlantınızı doğrulayıp tekrar deneyin.');
+			console.log('Hata: '.red, 'Sunucuya bağlanılamadı. İnternet bağlantınızı doğrulayıp tekrar deneyin.');
 		}
 	});
 
