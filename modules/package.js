@@ -116,6 +116,7 @@ var package = function (code, fromWhere, toWhere, version) {
             // Unzip End | Register Begin
             callback('Yeni paket yerel depoya kayıt ediliyor.'.cyan)
             this.installed.packages[code] = this.latest.packages[code]
+            this.installed.packages[code]['version'] = this.version
             this.installed.packages[code]['installation_path'] = this.installation_path
             delete this.installed.packages[code]['versions']
             // console.log(this.installed)
