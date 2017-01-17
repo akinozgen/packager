@@ -4,8 +4,8 @@ var installPackage = function (code) {
     console.log('\r');
     require('log-timestamp')
 
-    var version     = typeof process.argv[5] != 'undefined' ? process.argv[5] : undefined
-    var destination = typeof process.argv[4] != 'undefined' ? process.argv[4] : undefined
+    var version     = typeof process.argv[4] != 'undefined' ? process.argv[4] : undefined
+    var destination = typeof process.argv[5] != 'undefined' ? process.argv[5] : undefined
 
     var pack = new Package(code, 'remote', destination)
 
