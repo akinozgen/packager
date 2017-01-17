@@ -28,7 +28,7 @@ var package = function (code, fromWhere, toWhere, version) {
             if (typeof version != 'undefined')
                 this.version = version
             else
-                this.latest.packages[code].version
+                this.version = this.latest.packages[code].version
 
             if (typeof toWhere != 'undefined')
                 this.installation_path = toWhere
@@ -48,7 +48,7 @@ var package = function (code, fromWhere, toWhere, version) {
             if (typeof version != 'undefined')
                 this.version = version
             else
-                this.latest.packages[code].version
+                this.version = this.latest.packages[code].version
         }
     }
 
