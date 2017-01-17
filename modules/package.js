@@ -70,7 +70,7 @@ var package = function (code, fromWhere, toWhere, version) {
 
     this.downloadAndInstall = function (callback)
     {
-        var url       = this.versions[this.version]
+        var url       = this.versions[this.version].download
         var temporary = (process.env.TEMP + '\\' + this.name + '-' + this.version + '.zip')
         var file      = fs.createWriteStream(temporary)
 
