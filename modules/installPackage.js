@@ -7,7 +7,7 @@ var installPackage = function (code) {
     var version     = typeof process.argv[4] != 'undefined' ? process.argv[4] : undefined
     var destination = typeof process.argv[5] != 'undefined' ? process.argv[5] : undefined
 
-    var pack = new Package(code, 'remote', destination)
+    var pack = new Package(code, 'remote', destination, version)
 
     if ( ! pack.isExists())
     {

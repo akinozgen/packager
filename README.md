@@ -14,6 +14,7 @@ Aktif Özellikler
 17.01.2017 - Eklenen Özellikler
 -------------------------------
 1. İndirime sırasında indirme durumunu göstermek için progress bar eklendi.
+2. Spesifik sürüm belirtme eklendi.
 
 
 14.01.2017 - Eklenen Özellikler
@@ -43,10 +44,10 @@ nerede [paket_kodu]                        İstenilen paketin kurulum dizinini g
 
 İleride Eklenecekler
 ====================
-1. Spesifik sürüm belirtme
+1. Modules/ dizini içindeki modüllerin dosya hali yerine npm modülü gibi alt bir klasör ve kendilerine ait bağımlılıkların bu klasörlerde toplanması
 2. URI protokol ile programlar 'packager://calistir/npp' örneğindeki gibi çalıştırılacak ve kısayollar internet kısayolu formatında olacak (Steam gibi)
 3. Aktif Sunucu (PHP)
-4. Modules/ dizini içindeki modüllerin dosya hali yerine npm modülü gibi alt bir klasör ve kendilerine ait bağımlılıkların bu klasörlerde toplanması
+4. Kurulabilecek paketleri listeleme
 
 Demo Kurulum Yönergeleri
 ------------------------

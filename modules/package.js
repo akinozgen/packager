@@ -6,7 +6,7 @@ const fstream = require('fstream')
 const jsonFile = require('jsonfile')
 const ProgressBar = require('progress');
 
-var package = function (code, fromWhere, toWhere) {
+var package = function (code, fromWhere, toWhere, version) {
 
     this.name              = ''
     this.version           = ''
@@ -22,10 +22,14 @@ var package = function (code, fromWhere, toWhere) {
         if (typeof this.latest.packages[code] != 'undefined')
         {
             this.name              = this.latest.packages[code].name
-            this.version           = this.latest.packages[code].version
             this.versions          = this.latest.packages[code].versions
             this.provider          = this.latest.packages[code].provider
             this.executable        = this.latest.packages[code].executable
+            if (typeof version != 'undefined')
+                this.version = version
+            else
+                this.latest.packages[code].version
+
             if (typeof toWhere != 'undefined')
                 this.installation_path = toWhere
             else
@@ -38,10 +42,13 @@ var package = function (code, fromWhere, toWhere) {
         if (typeof this.installed.packages[code] != 'undefined')
         {
             this.name              = this.installed.packages[code].name
-            this.version           = this.installed.packages[code].version
             this.provider          = this.installed.packages[code].provider
             this.executable        = this.installed.packages[code].executable
             this.installation_path = this.installed.packages[code].installation_path
+            if (typeof version != 'undefined')
+                this.version = version
+            else
+                this.latest.packages[code].version
         }
     }
 
@@ -110,6 +117,7 @@ var package = function (code, fromWhere, toWhere) {
             callback('Yeni paket yerel depoya kayıt ediliyor.'.cyan)
             this.installed.packages[code] = this.latest.packages[code]
             this.installed.packages[code]['installation_path'] = this.installation_path
+            delete this.installed.packages[code]['versions']
             // console.log(this.installed)
             jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', this.installed)
             // Register End
