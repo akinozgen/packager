@@ -8,7 +8,7 @@ Aktif Özellikler
 1. Liste güncelleme
 2. Kaldırma
 3. Listeleme
-5. Kurulum (özel dizin belirtme)
+5. Kurulum (özel dizin belirtme, özel sürüm belirtme)
 6. Nerede özelliği
 
 17.01.2017 - Eklenen Özellikler
