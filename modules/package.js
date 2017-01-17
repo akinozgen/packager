@@ -1,9 +1,10 @@
 const fs = require('fs')
 const exec = require('child_process').exec;
-const http = require('http')
+const request = require('request')
 const unzip = require('unzip')
 const fstream = require('fstream')
 const jsonFile = require('jsonfile')
+const progress = require('request-progress');
 
 var package = function (code, fromWhere, toWhere) {
 
@@ -66,12 +67,18 @@ var package = function (code, fromWhere, toWhere) {
         var temporary = (process.env.TEMP + '\\' + this.name + '-' + this.version + '.zip')
         var file      = fs.createWriteStream(temporary)
 
-        var request   = http.get(url, function (response) {//Request Begin
-            callback('Uzak sunucu isteği kabul etti. İndirme başlıyor'.green)
-            response.pipe(file)
-            callback((this.name + " geçici dizine indiriliyor.").cyan)
-
-            response.on('end', function () {
+        progress(request(url), {})
+            .on('response', function (response) {
+                callback(('Uzak sunucu isteği kabul etti. Kod: ' + response.statusCode).green)
+                callback((this.name + " geçici dizine indiriliyor.").cyan)
+            }.bind(this))
+            .on('progress', function (state) {
+                callback(state)
+            })
+            .on('error', function (err) {
+                callback(('Bağlantı Hatası. Hata kodu: ' + err.code).red)
+            })
+            .on('end', function () {
                 callback((this.name + " geçici dizine indirildi.").green)
 
                 // Unzip Begin
@@ -92,9 +99,7 @@ var package = function (code, fromWhere, toWhere) {
                 jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', this.installed)
                 // Register End
                 callback('Kayıt işlemi tamamlandı ve belirtilen paket kuruldu.'.green)
-            }.bind(this))
-
-        }.bind(this))// Request End
+            }.bind(this)).pipe(file)
     }
 
     this.remove = function (callback)

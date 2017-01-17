@@ -6,7 +6,7 @@
 			"provider": "Notepad++Team",
 			"website": "https://notepad-plus-plus.org/",
 			"executable": "./notepad++.exe",
-			"versions": { 
+			"versions": {
 				"6.9.0": "http://projects.app/packager/server/downloads/npp.7.3.bin.zip"
 			}
 		}
