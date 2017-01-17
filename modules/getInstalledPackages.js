@@ -12,6 +12,7 @@ var getInstalledPackages = function () {
     {
         Object.keys(tableData).forEach(function (key) {
             var package = tableData[key]
+            table.cell('Kod'.cyan, (key).cyan)
             table.cell('Program Adı'.green, package.name)
             table.cell('Sürüm'.green, package.version)
             table.cell('Sahibi'.green, package.provider)

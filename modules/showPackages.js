@@ -13,6 +13,7 @@ var showPackages = function () {
     {
         Object.keys(tableData).forEach(function (key) {
             var package = tableData[key]
+            table.cell('Kod'.cyan, (key).cyan)
             table.cell('\nProgram Adı'.green, package.name)
             table.cell('Son Sürüm'.green, package.version)
             table.cell('Sahibi'.green, package.provider)
