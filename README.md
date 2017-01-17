@@ -17,6 +17,7 @@ Aktif Özellikler
 2. Spesifik sürüm belirtme eklendi.
 3. Kurulabilecek paketler komutu eklendi.
 4. Kurulabilecek paketler ve kurulumuş paketleri komutlarının çıktılarına paket kodu sütunu eklendi.
+5. Belirtilen paketin sürümlerini listeleme eklendi. Depo sürüm yapısında değişiklik yapıldı.
 
 
 14.01.2017 - Eklenen Özellikler
@@ -43,6 +44,7 @@ kaldir [paket_kodu]                        Belirtilen paketi kaldırır.
 listele                                    Kurulu paketleri gösterir.
 nerede [paket_kodu]                        İstenilen paketin kurulum dizinini gösterir.
 nelervar                                   Kurulabilecek paketleri gösterir.
+surumler [code]                            Belirtilen paketin sürümlerini listeler.
 ```
 
 İleride Eklenecekler
@@ -50,7 +52,6 @@ nelervar                                   Kurulabilecek paketleri gösterir.
 1. Modules/ dizini içindeki modüllerin dosya hali yerine npm modülü gibi alt bir klasör ve kendilerine ait bağımlılıkların bu klasörlerde toplanması
 2. URI protokol ile programlar 'packager://calistir/npp' örneğindeki gibi çalıştırılacak ve kısayollar internet kısayolu formatında olacak (Steam gibi)
 3. Aktif Sunucu (PHP)
-4. Kurulabilecek paketler komutu gibi belirtilen paket için sürümleri gösterme özelliği
 
 Demo Kurulum Yönergeleri
 ------------------------
