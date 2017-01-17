@@ -36,10 +36,11 @@ Kullanım: packager [seçenekler]
 -h, --help                                 Kullanım yardımı
 -V, --version                              Sürü bilgisi
 guncelle                      [            Paket listesini Günceller.
-kur [paket_kodu[, kurulacak_dizin, sürüm]] Belirtilen paketi kurar.
+kur [paket_kodu[, sürüm, kurulacak_dizin]] Belirtilen paketi kurar.
 kaldir [paket_kodu]                        Belirtilen paketi kaldırır.
 listele                                    Kurulu paketleri gösterir.
 nerede [paket_kodu]                        İstenilen paketin kurulum dizinini gösterir.
+nelervar                                   Kurulabilecek paketleri gösterir.
 ```
 
 İleride Eklenecekler
