@@ -31,7 +31,7 @@ var package = function (code, fromWhere, toWhere, version) {
                 this.version = this.latest.packages[code].version
 
             if (typeof toWhere != 'undefined')
-                this.installation_path = toWhere
+                this.installation_path = (toWhere + '\\' + code)
             else
                 this.installation_path = (process.env.PROGRAMS + '\\' + code)
 
