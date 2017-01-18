@@ -2,6 +2,7 @@
 'use strict';
 // Node Modules
 const program = require('commander');
+const url     = require('url');
 const pkg     = require('./package.json');
 
 // My Modules
@@ -15,6 +16,15 @@ const installPackage = require('./modules/installPackage');
 const removePackages = require('./modules/removePackages.js');
 const updateRepositories   = require('./modules/updateRepositories');
 const getInstalledPackages = require('./modules/getInstalledPackages');
+
+var urlObject = new url.parse(process.argv[2])
+
+if (urlObject.protocol == 'packager:')
+{
+    var code = String(urlObject.path).replace('/', '')
+    var argv = [ process.argv[0], process.argv[1], urlObject.host, code ]
+    process['argv'] = argv
+}
 
 program.version(pkg.version)
     .option('calistir [code]', 'İstenilen pakete ait program çalıştırılır.', run)

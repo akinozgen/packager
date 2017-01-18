@@ -13,6 +13,7 @@ Aktif Özellikler
 7. Kurulabilecek paketleri listeleme
 8. İstenilen paketin sürümlerini listeleme
 9. Liste güncelleme
+10. URI protokol ile komut yürütme (packager://calistir/npp örneğindeki gibi)
 
 17.01.2017 - Eklenen Özellikler
 -------------------------------
@@ -38,7 +39,7 @@ Kullanımı
 
 
 ```
-Kullanım: packager [seçenekler]
+Kullanım: packager [seçenekler] [--seçenekler]
 -h, --help                                 Kullanım yardımı
 -V, --version                              Sürü bilgisi
 calistir [paket_kodu]                      İstenilen pakete ait program çalıştırılır.
@@ -49,12 +50,18 @@ listele                                    Kurulu paketleri gösterir.
 nerede [paket_kodu]                        İstenilen paketin kurulum dizinini gösterir.
 nelervar                                   Kurulabilecek paketleri gösterir.
 surumler [paket_kodu]                      Belirtilen paketin sürümlerini listeler.
+
+Seçenekler:
+-t --tip=<konsol|handle>                   Çıktıyı komut satırı veya handle için değiştirir. Öntanımlı olarak konsol seçilidir                                   
 ```
 
 İleride Eklenecekler
 ====================
 1. Aktif Sunucu (PHP)
 2. URI protokol ile programlar 'packager://calistir/npp' örneğindeki gibi çalıştırılacak ve kısayollar internet kısayolu formatında olacak (Steam gibi)
+3. -t veya --tip parametresi ile çıktı tipi belirlenecek. -t parametresi saf metin çıktısı verecek ve bu çıktı c veya c# ile yazılmış bir handler taraından işlenecek.
+4. Bu handler URI protokol işlemlerini yakalayacak ve uygulayacak. İşlem tamamlanmazsa hata mesajları verecek. (C# veya C ile küçük bir handle yazılacak)
+5. Handler ile kısayol oluşturma, kayıt defterine işleme ve silme, URI protokol komutlarını yakalama ve işleme yapılacak.
 
 Demo Kurulum Yönergeleri
 ------------------------
