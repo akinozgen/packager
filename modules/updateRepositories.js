@@ -4,7 +4,7 @@ const http = require('http');
 var updateRepositories = function()
 {
 	var url = "http://projects.app/packager/server/packages/packages.json";
-	var file = fs.createWriteStream("./latest.json");
+	var file = fs.createWriteStream(__dirname + "/../latest.json");
 
 	http.get({ host: 'projects.app', port: 80 }, function (res) {
 		if (res.statusCode == 200)

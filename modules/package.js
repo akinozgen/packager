@@ -14,7 +14,7 @@ var package = function (code, fromWhere, toWhere, version) {
     this.executable        = ''
     this.installation_path = ''
     this.versions          = {}
-    this.latest            = jsonFile.readFileSync('./latest.json')
+    this.latest            = jsonFile.readFileSync(__dirname + '/../latest.json')
     this.installed         = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json')
 
     if (fromWhere == 'remote')

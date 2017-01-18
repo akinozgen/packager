@@ -4,7 +4,7 @@ const easyTable = require('easy-table')
 
 var showPackages = function () {
 
-    var latest = jsonFile.readFileSync('./latest.json')
+    var latest = jsonFile.readFileSync(__dirname + '/../latest.json')
 
     var tableData = latest.packages
     var table = new easyTable
