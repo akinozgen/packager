@@ -145,6 +145,14 @@ var package = function (code, fromWhere, toWhere, version) {
             callback('Yerel dosyalar bulunamadı.'.red)
     }
 
+    this.run = function (callback)
+    {
+        var executable = ('"' + String(this.installation_path + this.executable).replace('/', '\\') + '"')
+        callback((this.name + ' çalıştırılıyor').green)
+        exec(executable, function () {
+            callback((this.name + ' sonlandırıldl.').yellow)
+        }.bind(this))
+    }
 }
 
 module.exports = package

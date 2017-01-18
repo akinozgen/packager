@@ -5,13 +5,14 @@ Packager sayesinde GNU/Linux tabanlı sistemlerde kullanılan paket yönetimi ma
 
 Aktif Özellikler
 ----------------
-1. Liste güncelleme
+1. Çalıştır
 2. Kaldırma
 3. Listeleme
 5. Kurulum (özel dizin belirtme, özel sürüm belirtme)
 6. Nerede özelliği
 7. Kurulabilecek paketleri listeleme
 8. İstenilen paketin sürümlerini listeleme
+9. Liste güncelleme
 
 17.01.2017 - Eklenen Özellikler
 -------------------------------
@@ -40,13 +41,14 @@ Kullanımı
 Kullanım: packager [seçenekler]
 -h, --help                                 Kullanım yardımı
 -V, --version                              Sürü bilgisi
-guncelle                      [            Paket listesini Günceller.
+calistir [paket_kodu]                      İstenilen pakete ait program çalıştırılır.
+guncelle                                   Paket listesini Günceller.
 kur [paket_kodu[, sürüm, kurulacak_dizin]] Belirtilen paketi kurar.
 kaldir [paket_kodu]                        Belirtilen paketi kaldırır.
 listele                                    Kurulu paketleri gösterir.
 nerede [paket_kodu]                        İstenilen paketin kurulum dizinini gösterir.
 nelervar                                   Kurulabilecek paketleri gösterir.
-surumler [code]                            Belirtilen paketin sürümlerini listeler.
+surumler [paket_kodu]                      Belirtilen paketin sürümlerini listeler.
 ```
 
 İleride Eklenecekler

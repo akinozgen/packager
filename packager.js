@@ -6,6 +6,7 @@ const pkg     = require('./package.json');
 
 // My Modules
 var installed = require('./modules/init')();
+const run     = require('./modules/run');
 const Package = require('./modules/package');
 const getVersions    = require('./modules/getVersions');
 const packageWhere   = require('./modules/packageWhere');
@@ -16,6 +17,7 @@ const updateRepositories   = require('./modules/updateRepositories');
 const getInstalledPackages = require('./modules/getInstalledPackages');
 
 program.version(pkg.version)
+    .option('calistir [code]', 'İstenilen pakete ait program çalıştırılır.', run)
     .option('guncelle', 'Paket listesini günceller.', updateRepositories)// Done
     .option('kur [paket_kodu] [kurulacak_dizin] [sürüm]', 'Belirtilen paketi kurar.', installPackage)
     .option('kaldir [paket_kodu]', 'Belirtilen paketi kaldırır.', removePackages) // Done
