@@ -29,23 +29,24 @@ namespace PackagerAppHandler
                 if (uri.Length >= 5) command += (" " + arg1);
                 if (uri.Length >= 6) command += (" " + arg2);
 
-                Process proc = new System.Diagnostics.Process();
-                proc.StartInfo.FileName = @"D:\.dev\CurrentProjects\packager\packager.cmd";
-                proc.StartInfo.Arguments = command;
+                Process proc = new Process();
+
+                proc.StartInfo.FileName = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
                 proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                proc.StartInfo.CreateNoWindow = true;
-                proc.StartInfo.UseShellExecute = false;
                 proc.StartInfo.RedirectStandardOutput = true;
+                proc.StartInfo.UseShellExecute = false;
+                proc.StartInfo.CreateNoWindow = true;
+                proc.StartInfo.Arguments = command;
                 proc.Start();
+
                 string output = proc.StandardOutput.ReadToEnd();
                 proc.WaitForExit();
-                //Çıktıyı İşle
             }
             else
             {
                 MessageBox.Show("Parametre hatalı", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
             Application.Exit();
         }
     }
