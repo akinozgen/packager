@@ -1,6 +1,6 @@
 const Package = require('./package');
 
-var removePackages = function (code) {
+var removePackages = function (code, options) {
     console.log('\r');
     require('log-timestamp')
 

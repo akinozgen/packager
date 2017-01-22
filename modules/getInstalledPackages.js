@@ -2,7 +2,7 @@ const colors = require('colors')
 const jsonFile = require('jsonfile')
 const easyTable = require('easy-table')
 
-var getInstalledPackages = function () {
+var getInstalledPackages = function (options) {
     var installed = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json')
     var tableData = installed.packages
 

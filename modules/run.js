@@ -1,6 +1,6 @@
 var Package = require('./package')
 
-var run = function (code)
+var run = function (code, options)
 {
     require('log-timestamp')
     var pack = new Package(code, 'local')

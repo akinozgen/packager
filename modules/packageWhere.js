@@ -1,6 +1,6 @@
 var installed = require('./init')();
 
-var packageWhere = function (code) {
+var packageWhere = function (code, options) {
 
     var packages = installed.packages;
     if (packages[code])

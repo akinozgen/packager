@@ -2,7 +2,7 @@ const colors = require('colors')
 const jsonFile = require('jsonfile')
 const easyTable = require('easy-table')
 
-var showPackages = function () {
+var showPackages = function (options) {
 
     var latest = jsonFile.readFileSync(__dirname + '/../latest.json')
 

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const http = require('http');
 
-var updateRepositories = function()
+var updateRepositories = function(options)
 {
 	var url = "http://projects.app/packager/server/packages/packages.json";
 	var file = fs.createWriteStream(__dirname + "/../latest.json");

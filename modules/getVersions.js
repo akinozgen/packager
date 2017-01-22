@@ -3,7 +3,7 @@ const Package = require('./package')
 const jsonFile = require('jsonfile');
 const easyTable = require('easy-table')
 
-var getVersions = function (code)
+var getVersions = function (code, options)
 {
     var index = 1
     var pack = new Package(code, 'remote')

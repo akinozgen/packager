@@ -1,6 +1,6 @@
 const Package = require('./package');
 
-var installPackage = function (code, version, destination) {
+var installPackage = function (code, version, destination, options) {
     console.log('\r');
     require('log-timestamp')
 
