@@ -9,8 +9,9 @@ c:\users\akın özgen\documents\visual studio 2017\Projects\PackagerAppHandler\P
 D:\.dev\CurrentProjects\packager\PackagerAppHandler\PackagerAppHandler\bin\Debug\PackagerAppHandler.exe.config
 D:\.dev\CurrentProjects\packager\PackagerAppHandler\PackagerAppHandler\bin\Debug\PackagerAppHandler.exe
 D:\.dev\CurrentProjects\packager\PackagerAppHandler\PackagerAppHandler\bin\Debug\PackagerAppHandler.pdb
-D:\.dev\CurrentProjects\packager\PackagerAppHandler\PackagerAppHandler\obj\Debug\PackagerAppHandler.csprojResolveAssemblyReference.cache
 D:\.dev\CurrentProjects\packager\PackagerAppHandler\PackagerAppHandler\obj\Debug\PackagerAppHandler.Properties.Resources.resources
 D:\.dev\CurrentProjects\packager\PackagerAppHandler\PackagerAppHandler\obj\Debug\PackagerAppHandler.csproj.GenerateResource.Cache
 D:\.dev\CurrentProjects\packager\PackagerAppHandler\PackagerAppHandler\obj\Debug\PackagerAppHandler.exe
 D:\.dev\CurrentProjects\packager\PackagerAppHandler\PackagerAppHandler\obj\Debug\PackagerAppHandler.pdb
+D:\.dev\CurrentProjects\packager\PackagerAppHandler\PackagerAppHandler\obj\Debug\PackagerAppHandler.Summary.resources
+D:\.dev\CurrentProjects\packager\PackagerAppHandler\PackagerAppHandler\obj\Debug\PackagerAppHandler.Main.resources
