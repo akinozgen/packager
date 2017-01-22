@@ -6,7 +6,7 @@ const fstream = require('fstream')
 const jsonFile = require('jsonfile')
 const ProgressBar = require('progress');
 
-var package = function (code, fromWhere, toWhere, version) {
+var package = function (code, fromWhere, toWhere, version, options) {
 
     this.name              = ''
     this.version           = ''
@@ -76,8 +76,8 @@ var package = function (code, fromWhere, toWhere, version) {
 
         var req = request.get(url)
         req.on('response', function (response) {
-            callback(('Uzak sunucu isteği kabul etti. Kod: ' + response.statusCode).green)
-            callback((this.name + " geçici dizine indiriliyor.").cyan)
+            callback(('Uzak sunucu isteği kabul etti. Kod: ' + response.statusCode).green, 'CONNECTIONESTABILISHED')
+            callback((this.name + " geçici dizine indiriliyor.").cyan, 'DOWNLOADING')
 
             var len = parseInt(response.headers['content-length'], 10)
 
@@ -90,21 +90,22 @@ var package = function (code, fromWhere, toWhere, version) {
 
             response.on('data', function (data) {
                 try {
-                    bar.tick(data.length)
+                    if (options.parent.tip == 'konsol')
+                        bar.tick(data.length)
                 } catch (err) {
-                    callback(('Bağlantı hatası. Hata Kodu: ' + err).red)
+                    callback(('Bağlantı hatası. Hata Kodu: ' + err).red, 'CONNECTIONERROR')
                     process.exit(1)
                 }
-            })
+            }.bind(this))
         }.bind(this))
         req.on('error', function (err) {
-            callback(('Bağlantı Hatası. Hata kodu: ' + err.code).red)
+            callback(('Bağlantı Hatası. Hata kodu: ' + err.code).red, 'CONNECTIONERROR')
         })
         req.on('end', function () {
-            callback((this.name + " geçici dizine indirildi.").green)
+            callback((this.name + " geçici dizine indirildi.").green, 'DOWNLOADED')
 
             // Unzip Begin
-            callback('Arşivden çıkartılmaya başlandı.'.cyan)
+            callback('Arşivden çıkartılmaya başlandı.'.cyan, 'EXTRACTBEGIN')
             if ( ! fs.existsSync(this.installation_path) )
                 fs.mkdirSync(this.installation_path)
 
@@ -112,9 +113,9 @@ var package = function (code, fromWhere, toWhere, version) {
             var write = fstream.Writer(this.installation_path)
 
             read.pipe(unzip.Parse()).pipe(write)
-            callback('Arşivden çıkartma başarılı.'.green)
+            callback('Arşivden çıkartma başarılı.'.green, 'EXTRACTSUCCESS')
             // Unzip End | Register Begin
-            callback('Yeni paket yerel depoya kayıt ediliyor.'.cyan)
+            callback('Yeni paket yerel depoya kayıt ediliyor.'.cyan, 'REGISTERING')
             this.installed.packages[code] = this.latest.packages[code]
             this.installed.packages[code]['version'] = this.version
             this.installed.packages[code]['installation_path'] = this.installation_path
@@ -122,7 +123,7 @@ var package = function (code, fromWhere, toWhere, version) {
             // console.log(this.installed)
             jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', this.installed)
             // Register End
-            callback('Kayıt işlemi tamamlandı ve belirtilen paket kuruldu.'.green)
+            callback('Kayıt işlemi tamamlandı ve belirtilen paket kuruldu.'.green, 'INSTALLEDSUCCESSFULLY')
         }.bind(this)).pipe(file)
     }
 
@@ -130,27 +131,27 @@ var package = function (code, fromWhere, toWhere, version) {
     {
         if (fs.existsSync(this.installation_path))
             exec('rmdir /s /q "' + this.installation_path + '"', function () {
-                callback('Yerel dosyalar silindi.'.green)
+                callback('Yerel dosyalar silindi.'.green, 'LOCALDELETED')
 
                 delete this.installed.packages[code]
                 jsonFile.writeFile(process.env.PROGRAMS + '\\installed.json', this.installed, function (err) {
                     if (err)
                         callback(err)
                     else
-                        callback('Yerel depodan kaldırıldı.'.green)
+                        callback('Yerel depodan kaldırıldı.'.green, 'REGISTERYDELETED')
                 }.bind(this))
 
             }.bind(this))
         else
-            callback('Yerel dosyalar bulunamadı.'.red)
+            callback('Yerel dosyalar bulunamadı.'.red, 'LOCALFILESMISSING')
     }
 
     this.run = function (callback)
     {
         var executable = ('"' + String(this.installation_path + this.executable).replace('/', '\\') + '"')
-        callback((this.name + ' çalıştırılıyor').green)
+        callback((this.name + ' çalıştırılıyor').green, 'RUNNING')
         exec(executable, function () {
-            callback((this.name + ' sonlandırıldl.').yellow)
+            callback((this.name + ' sonlandırıldl.').yellow, undefined)
         }.bind(this))
     }
 }

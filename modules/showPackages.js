@@ -9,7 +9,7 @@ var showPackages = function (options) {
     var tableData = latest.packages
     var table = new easyTable
 
-    if (Object.keys(tableData).length > 0)
+    if (Object.keys(tableData).length > 0 && options.parent.tip == 'konsol')
     {
         Object.keys(tableData).forEach(function (key) {
             var package = tableData[key]
@@ -22,10 +22,21 @@ var showPackages = function (options) {
         })
         console.log(table.toString())
     }
+    else if (Object.keys(tableData).length > 0 && options.parent.tip == 'handler')
+    {
+        // output
+    }
     else
     {
-        require('log-timestamp')
-        console.log('Bilgi bulunamadı'.yellow)
+        if (options.parent.tip == 'konsol')
+        {
+            require('log-timestamp')
+            console.log('Bilgi bulunamadı'.yellow)
+        }
+        else
+        {
+            console.log('NOVERSION')
+        }
     }
 
 }

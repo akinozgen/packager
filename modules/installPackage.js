@@ -2,28 +2,41 @@ const Package = require('./package');
 
 var installPackage = function (code, version, destination, options) {
     console.log('\r');
-    require('log-timestamp')
+    if (options.parent.tip == 'konsol')
+        require('log-timestamp')
 
     var pack = new Package(code, 'remote', destination, version)
 
     if ( ! pack.isExists())
     {
-        console.log('Böyle bir paket bulunamadı.'.yellow)
+        if (options.parent.tip == 'konsol')
+            console.log('Böyle bir paket bulunamadı.'.yellow)
+        else
+            console.log('PACKAGENOTFOUND')
         process.exit(1)
     }
     else
     {
-        console.log('Paket bulundu. Kurulum birazdan başlayacak'.green)
+        if (options.parent.tip == 'konsol')
+            console.log('Paket bulundu. Kurulum birazdan başlayacak'.green)
+        else
+            console.log('PACKAGEFOUND')
     }
 
     if (pack.isInstalled())
     {
-        console.log('Bu paket zaten kurulmuş.'.yellow)
+        if (options.parent.tip == 'konsol')
+            console.log('Bu paket zaten kurulmuş.'.yellow)
+        else
+            console.log('ALREADYINSTALLED')
         process.exit(1)
     }
 
-    pack.downloadAndInstall(function (message) {
-        console.log(message)
+    pack.downloadAndInstall(function (message, code) {
+        if (options.parent.tip == 'konsol')
+            console.log(message)
+        else
+            console.log(code)
     })
 };
 
