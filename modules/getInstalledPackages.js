@@ -8,7 +8,7 @@ var getInstalledPackages = function (options) {
 
     var table = new easyTable
 
-    if (Object.keys(tableData).length > 0)
+    if (Object.keys(tableData).length > 0 && options.parent.tip == 'konsol')
     {
         Object.keys(tableData).forEach(function (key) {
             var package = tableData[key]
@@ -21,9 +21,16 @@ var getInstalledPackages = function (options) {
         });
         console.log(table.toString())
     }
+    else if (Object.keys(tableData).length > 0 && options.parent.tip == 'handler')
+    {
+        // output
+    }
     else
     {
-        console.log('\nUyarı: '.yellow, 'Hiç kurulu paketiniz yok.')
+        if (options.parent.tip == 'konsol')
+            console.log('\nUyarı: '.yellow, 'Hiç kurulu paketiniz yok.')
+        else
+            console.log('NOPACKAGEINSTALLED')
     }
 
 }
