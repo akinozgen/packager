@@ -1,7 +1,8 @@
 const colors = require('colors')
 const Package = require('./package')
-const jsonFile = require('jsonfile');
+const jsonFile = require('jsonfile')
 const easyTable = require('easy-table')
+const js2xmlparser = require('js2xmlparser')
 
 var getVersions = function (code, options)
 {
@@ -17,6 +18,8 @@ var getVersions = function (code, options)
     var tableData = pack.versions
     var table = new easyTable
 
+
+
     if (Object.keys(tableData).length > 0 && options.parent.type == 'konsol')
     {
         Object.keys(tableData).forEach(function (key) {
@@ -30,7 +33,13 @@ var getVersions = function (code, options)
     }
     else if (Object.keys(tableData).length > 0 && options.parent.type == 'handler')
     {
-        // output
+        // Because XML keys cannot be start with a number or special characters...
+        Object.keys(tableData).forEach(function (key) {
+            tableData['version:' + key] = tableData[key]
+            delete tableData[key]
+        })
+
+        console.log(js2xmlparser.parse("packages", tableData))
     }
     else
     {

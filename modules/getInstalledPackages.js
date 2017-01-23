@@ -1,6 +1,7 @@
 const colors = require('colors')
 const jsonFile = require('jsonfile')
 const easyTable = require('easy-table')
+const js2xmlparser = require('js2xmlparser')
 
 var getInstalledPackages = function (options) {
     var installed = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json')
@@ -23,7 +24,7 @@ var getInstalledPackages = function (options) {
     }
     else if (Object.keys(tableData).length > 0 && options.parent.type == 'handler')
     {
-        // output
+        console.log(js2xmlparser.parse("packages", tableData))
     }
     else
     {
