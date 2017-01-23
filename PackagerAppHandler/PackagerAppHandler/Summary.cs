@@ -12,6 +12,11 @@ namespace PackagerAppHandler
                 if (output[i] != null)
                     listBox1.Items.Add(output[i]);
             }
+            
+            if (listBox1.Items.Count < 1)
+            {
+                Application.Exit();
+            }
         }
 
         private void Summary_FormClosing(object sender, FormClosingEventArgs e)

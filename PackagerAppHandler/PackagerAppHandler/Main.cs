@@ -49,26 +49,26 @@ namespace PackagerAppHandler
                 string mes = null;
                 switch (output[i])
                 {
-                    case "NOPACKAGEINSTALLED": mes = "Hiç kurulu paket yok."; break;
-                    case "NOVERSIONFOUND": mes = "Bu pakete ait sürüm yok. Kurulum yapılamaz"; break;
-                    case "NOVERSION": mes = "Bu pakete ait sürüm yok. Kurulum yapılamaz"; break;
-                    case "PACKAGENOTFOUND": mes = "Belirtilen paket bulunamadı. Paket kodunuz hatalı veya yerel deponuz eski olabilir"; break;
-                    case "PACKAGEFOUND": mes = "Paket bulundu."; break;
-                    case "ALREADYINSTALLED": mes = "Bu paket zaten kurulmuş."; break;
-                    case "CONNECTIONESTABILISHED": mes = "Bağlantı sağlandı."; break;
-                    case "DOWNLOADING": mes = "İndiriliyor."; break;
-                    case "CONNECTIONERROR": mes = "Bağlantı hatası."; break;
-                    case "DOWNLOADED": mes = "İndirme tamamlandı."; break;
-                    case "EXTRACTBEGIN": mes = "Arşivden çıkartma başlandı."; break;
-                    case "EXTRACTSUCCESS": mes = "Arşivden çıkartma başarılı."; break;
-                    case "REGISTERING": mes = "Kayıt ediliyor."; break;
-                    case "INSTALLEDSUCCESSFULLY": mes = "Başarıyla kuruldu."; break;
-                    case "LOCALDELETED": mes = "Yerel dosyalar silindi."; break;
-                    case "REGISTERYDELETED": mes = "Kayıtlardan silindi."; break;
-                    case "LOCALFILESMISSING": mes = "Yerel dosyalar kayıp."; break;
-                    case "RUNNING": mes = "Çalıştırılıyor."; break;
-                    case "NOTINSTALLED": mes = "Bu paket kurulu değil."; break;
-                    case "CONNECTIONREFUSED": mes = "Bağlantı reddedildi."; break;
+                    case "NOPACKAGEINSTALLED": mes = "No packge installed."; break;
+                    case "NOVERSIONFOUND": mes = "There is no version for this packge. It cant be install"; break;
+                    case "NOVERSION": mes = "There is no version for this packge. It cant be install"; break;
+                    case "PACKAGENOTFOUND": mes = "Package not found. May package code incorret or local repository empty."; break;
+                    case "PACKAGEFOUND": mes = "Package found."; break;
+                    case "ALREADYINSTALLED": mes = "This is already installed."; break;
+                    case "CONNECTIONESTABILISHED": mes = "Connection estabilished."; break;
+                    case "DOWNLOADING": mes = "Downloading."; break;
+                    case "CONNECTIONERROR": mes = "Connection error."; break;
+                    case "DOWNLOADED": mes = "Download error."; break;
+                    case "EXTRACTBEGIN": mes = "Extractation begin."; break;
+                    case "EXTRACTSUCCESS": mes = "Extractation success."; break;
+                    case "REGISTERING": mes = "Registering."; break;
+                    case "INSTALLEDSUCCESSFULLY": mes = "Installed correctly."; break;
+                    case "LOCALDELETED": mes = "Local files deleted."; break;
+                    case "REGISTERYDELETED": mes = "Removed from registry."; break;
+                    case "LOCALFILESMISSING": mes = "Local file missing."; break;
+                    case "RUNNING": mes = "Running."; break;
+                    case "NOTINSTALLED": mes = "It ain't installed."; break;
+                    case "CONNECTIONREFUSED": mes = "Connection refused."; break;
                     default:
                         break;
                 }
@@ -102,7 +102,7 @@ namespace PackagerAppHandler
                 string[] uri = argv[0].Split('/');
                 protocol = uri[0];
                 command = uri[2];
-
+                
                 if (uri.Length >= 4) value = uri[3];
                 if (uri.Length >= 5) arg1 = uri[4];
                 if (uri.Length >= 6) arg2 = uri[5];
@@ -125,14 +125,18 @@ namespace PackagerAppHandler
 
                 string[] output = splitOutput(proc.StandardOutput.ReadToEnd());
 
-                Summary sumForm = new Summary(procOutput(output));
-                sumForm.Show();
+                if (uri[2] != "run" && output.Length > 0)
+                {
+                    Summary sumForm = new Summary(procOutput(output));
+                    sumForm.Show();
+                }
 
                 proc.WaitForExit();
             }
             else
             {
-                MessageBox.Show("Parametre hatalı", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Unusefull parameter", "Fatal Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
     }
