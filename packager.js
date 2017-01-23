@@ -31,38 +31,38 @@ if (process.argv[2])
 
 // Constructing program
 program.version(pkg.version)
-    .option('-t, --tip <type>', 'Çıktı tipi (konsol veya handler olabilir)', /^(konsol|handler)$/i, 'konsol')
+    .option('-t, --type <type>', 'Output Type (konsol or handler)', /^(konsol|handler)$/i, 'konsol')
 // Run command
-program.command('calistir <paket_kodu>')
-    .description('İstenilen pakete ait program çalıştırılır.')
+program.command('run <package_code>')
+    .description('Run a package.')
     .action(run)
 // Update repository command
-program.command('guncelle')
-    .description('Paket listesini günceller.')
+program.command('update')
+    .description('Updates repository.')
     .action(updateRepositories)
 // Install command
-program.command('kur <paket_kodu> [sürüm] [kurulacak_dizin]')
-    .description('Belirtilen paketi kurar. (<zorunlu parametre> [isteğe bağlı parametre])')
+program.command('install <package_code> [version] [directory]')
+    .description('Install specified package. (<necessary> [unnecessary])')
     .action(installPackage)
 // Remove command
-program.command('kaldir <paket_kodu>')
-    .description('Belirtilen paketi kaldırır.')
+program.command('remove <package_code>')
+    .description('Remove specified package.')
     .action(removePackages)
 // Show installed command
-program.command('listele')
-    .description('Kurulu paketleri gösterir.')
+program.command('list')
+    .description('List installed packages.')
     .action(getInstalledPackages)
 // Where command
-program.command('nerede <paket_kodu>')
-    .description('İstenilen paketin kurulum dizinini gösterir.')
+program.command('where <package_code>')
+    .description('Show specified package\'s installation directory.')
     .action(packageWhere)
 // Whats inside command
-program.command('nelervar')
-    .description('Kurulabilecek paketleri gösterir.')
+program.command('whatsnew')
+    .description('Show installable packages.')
     .action(showPackages)
 // Get versions command
-program.command('surumler <paket_kodu>')
-    .description('Belirtilen paketin sürümlerini ve açıklamalarını gösterir.')
+program.command('versions <package_code>')
+    .description('Lists specified packages\'s versions and descriptions.')
     .action(getVersions)
 
 program.parse(process.argv)

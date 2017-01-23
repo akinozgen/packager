@@ -8,17 +8,17 @@ var updateRepositories = function(options)
 
 	var req = request.get(url)
 	req.on('error', function (err) {
-		if (options.parent.tip == 'konsol')
-			console.log(('Bağlantı Hatası: ' + err).red)
+		if (options.parent.type == 'konsol')
+			console.log(('Connection error: ' + err).red)
 		else
 			console.log('CONNECTIONERROR')
 	})
 	req.on('end', function () {
-		if (options.parent.tip == 'konsol')
+		if (options.parent.type == 'konsol')
 		{
 			console.log()
 			require('log-timestamp')
-			console.log('Yerel Depo Güncellendi.'.green)
+			console.log('Local repository updated.'.green)
 		}
 		else
 			console.log('UPDATED')

@@ -1,31 +1,30 @@
 22.01.2017
 ----------
-1. URI komutlarını yakalamak ve işlemek için c# ile bir handler yazıldı.
-2. Handler için özel çıktılar türetildi. -t parametresi değerine göre farklı çıktılar ayarlandı.
-3. Handler bu farklı çıktıları kendi içinde yorumlayıp özet formunda listeleyebiliyor.
-4. Logo tasarlandı. Handler için icon olarak kullanıldı. Artık boş packager kısayollarında bu ikon görünüyor.
+1. A Handler app written with c# for catching and processing URI commands.
+2. Created special output for handler.
+3. Handler can be process this output and show a summary.
+4. Created a logo and icon. Handler uses this icon so empty packager:// shortcuts have a default packager icon.
 
 
 19.01.2017
 ----------
-1. Çalıştır komutu
-2. URI komutlarını yakalama ve işleme
+1. Run command
+2. Catching and processing URI commands.
 
 
 17.01.2017
 ----------
-1. İndirime sırasında indirme durumunu göstermek için progress bar eklendi.
-2. Spesifik sürüm belirtme eklendi.
-3. Kurulabilecek paketler komutu eklendi.
-4. Kurulabilecek paketler ve kurulumuş paketleri komutlarının çıktılarına paket kodu sütunu eklendi.
-5. Belirtilen paketin sürümlerini listeleme eklendi. Depo sürüm yapısında değişiklik yapıldı.
+1. A progress bar added for install command.
+2. At install can be define a specified version.
+3. Whatsnew command for showing uninstalled packages.
+4. Package code column added table lists.
+5. Versions of a package command. Repository version structure changed.
 
 
 14.01.2017
 ----------
-1. Package isminde tekil paket için özel nesne sınıfı eklendi.
-2. Package sınıfında paketin kurulumu, kontrolleri ve kaldırma işlemleri yapılabiliyor.
-3. Yeni sınıf ile işlemler daha basit ve modüler hale getirildi. Kod ve zamandan tasarruf edildi.
-4. Anlık loglamalar fazlalaştırıldı. Log sisteminde log-timestamp modülü kullanıldı.
-5. Loglarda renk tüm satıra verildi. Durum parametresinin yerini zaman damgası aldı.
-6. Özel modüller modules/ dizini altında toplanarak kalabalık önlendi.
+1. A new object class 'Package' added.
+2. At 'Package' class, we can check exists, check is installed, remove, delete and install.
+3. My modules moved to a new modules/ directory. File crowd defeated.
+4. Logs increased. Added timestamp for logs.
+5. At log colors, color spreaded all string. State parameter changed with timestamp.

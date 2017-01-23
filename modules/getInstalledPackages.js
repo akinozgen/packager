@@ -8,27 +8,27 @@ var getInstalledPackages = function (options) {
 
     var table = new easyTable
 
-    if (Object.keys(tableData).length > 0 && options.parent.tip == 'konsol')
+    if (Object.keys(tableData).length > 0 && options.parent.type == 'konsol')
     {
         Object.keys(tableData).forEach(function (key) {
             var package = tableData[key]
-            table.cell('Kod'.cyan, (key).cyan)
-            table.cell('Program Adı'.green, package.name)
-            table.cell('Sürüm'.green, package.version)
-            table.cell('Sahibi'.green, package.provider)
+            table.cell('Code'.cyan, (key).cyan)
+            table.cell('Name'.green, package.name)
+            table.cell('Version'.green, package.version)
+            table.cell('Provider'.green, package.provider)
             table.cell('Website'.green, package.website)
             table.newRow()
         });
         console.log(table.toString())
     }
-    else if (Object.keys(tableData).length > 0 && options.parent.tip == 'handler')
+    else if (Object.keys(tableData).length > 0 && options.parent.type == 'handler')
     {
         // output
     }
     else
     {
-        if (options.parent.tip == 'konsol')
-            console.log('\nUyarı: '.yellow, 'Hiç kurulu paketiniz yok.')
+        if (options.parent.type == 'konsol')
+            console.log('\nWarning: '.yellow, 'No package found installed.')
         else
             console.log('NOPACKAGEINSTALLED')
     }

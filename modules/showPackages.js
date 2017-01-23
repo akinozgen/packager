@@ -9,29 +9,29 @@ var showPackages = function (options) {
     var tableData = latest.packages
     var table = new easyTable
 
-    if (Object.keys(tableData).length > 0 && options.parent.tip == 'konsol')
+    if (Object.keys(tableData).length > 0 && options.parent.type == 'konsol')
     {
         Object.keys(tableData).forEach(function (key) {
             var package = tableData[key]
-            table.cell('Kod'.cyan, (key).cyan)
-            table.cell('\nProgram Adı'.green, package.name)
-            table.cell('Son Sürüm'.green, package.version)
-            table.cell('Sahibi'.green, package.provider)
+            table.cell('Code'.cyan, (key).cyan)
+            table.cell('Name'.green, package.name)
+            table.cell('Last Version'.green, package.version)
+            table.cell('Provider'.green, package.provider)
             table.cell('Website'.green, package.website)
             table.newRow()
         })
         console.log(table.toString())
     }
-    else if (Object.keys(tableData).length > 0 && options.parent.tip == 'handler')
+    else if (Object.keys(tableData).length > 0 && options.parent.type == 'handler')
     {
         // output
     }
     else
     {
-        if (options.parent.tip == 'konsol')
+        if (options.parent.type == 'konsol')
         {
             require('log-timestamp')
-            console.log('Bilgi bulunamadı'.yellow)
+            console.log('No Information'.yellow)
         }
         else
         {

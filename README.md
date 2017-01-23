@@ -1,53 +1,56 @@
-Packager Windows Paket Yöneticisi
+Packager Windows Package Ma.nager
 =================================
 
-Packager sayesinde GNU/Linux tabanlı sistemlerde kullanılan paket yönetimi mantığı ile windows programlarınızı buradan yönetebileceksiniz.
-Gelişmeleri twitter hesabı (@winpackager) üzerinden takip edebilirsiniz...
+Packager is a package manager app for windows built with nodejs and c#. You can manage open source software as package like GNU/Linux
+Changelog and news can be watch on twitter (@winpackager)
 
-Değişiklikler için CHANGELOG.md dosyasına göz atabilirsiniz. Değişiklikleri twitter üzerinden duyurmaya çalışacağım...
+You can check out CHANGELOG.md for changes. I'll be try announce all changes on twitter...
 
-Aktif Özellikler
-----------------
-1. Çalıştır
-2. Kaldırma
-3. Listeleme
-5. Kurulum (özel dizin belirtme, özel sürüm belirtme)
-6. Nerede özelliği
-7. Kurulabilecek paketleri listeleme
-8. İstenilen paketin sürümlerini listeleme
-9. Liste güncelleme
-10. URI protokol ile komut yürütme (packager://calistir/npp örneğindeki gibi)
+Actives
+-------
+1. Run
+2. Remove
+3. List
+5. Install (w/ specified directory & version)
+6. Where is
+7. View uninstalled packages
+8. List versions of specified package
+9. Update repository
+10. Run commands with URI strings (like packager://run/npp)
 
-Kullanımı
----------
->Not: Güncelleme işlemi için updateRepositories.js dosyasındaki url değişkeninin düzenlenmesi gerekmektedir. Sunucu dosyaları ana dizindeki server içindedir. İndirmeler için de uzak sunucu dosyaları içindeki packages.json dosyasındaki bazı url strignlerinin değiştirilmesi gerekebilir...
+Using
+-----
+>Attention: For the update and install, url string must be edited in updateRepositories.js. Server files included in /server directory...
 
 
 ```
-Kullanım: packager [seçenekler] [--seçenekler]
--h, --help                                 Kullanım yardımı
--V, --version                              Sürü bilgisi
-calistir [paket_kodu]                      İstenilen pakete ait program çalıştırılır.
-guncelle                                   Paket listesini Günceller.
-kur [paket_kodu[, sürüm, kurulacak_dizin]] Belirtilen paketi kurar.
-kaldir [paket_kodu]                        Belirtilen paketi kaldırır.
-listele                                    Kurulu paketleri gösterir.
-nerede [paket_kodu]                        İstenilen paketin kurulum dizinini gösterir.
-nelervar                                   Kurulabilecek paketleri gösterir.
-surumler [paket_kodu]                      Belirtilen paketin sürümlerini listeler.
+Usage: packager [options] [command]
 
-Seçenekler:
--t --tip=<konsol|handle>                   Çıktıyı komut satırı veya handle için değiştirir. Öntanımlı olarak konsol seçilidir                                   
+
+  Commands:
+
+    run <package_code>                            Run a package.
+    update                                        Updates repository.
+    install <package_code> [version] [directory]  Install specified package. (<necessary> [unnecessary])
+    remove <package_code>                         Remove specified package.
+    list                                          List installed packages.
+    where <package_code>                          Show specified package's installation directory.
+    whatsnew                                      Show installable packages.
+    versions <package_code>                       Lists specified packages's versions and descriptions.
+
+  Options:
+
+    -h, --help         output usage information
+    -V, --version      output the version number
+    -t, --type <type>  Output Type (konsol or handler)                                 
 ```
 
-İleride Eklenecekler
-====================
-1. Aktif Sunucu (PHP)
-2. Handler ile kısayol oluşturma, kayıt defterine işleme ve silme, URI protokol komutlarını yakalama ve işleme yapılacak.
-3. Kurulmamış paketler arasında arama seçeneği eklenecek.
+Will Be Add In Future
+=====================
+1. Active Server (PHP)
+2. Make shortcuts, create, edit and delete registry enteries with handler.
+3. Search in repository
 
-Demo Kurulum Yönergeleri
-------------------------
-Server klasörü içindeki dosyaları sanal sunucunuzun ana dizine veya ayarladığınız herhangi bir dizine atın. updateRepositories.js dosyası içinde url stringindeki url'yi attığınız sunucu dosyaları ile aynı olarak değiştirin. İlk çalıştırmada oluşturulacak dizinler ve kaydedilecek ortam değişkenleri sebebiyle yönetici olarak çalıştırmak gerekebilir. Paket kurulumu için internete ihtiyaç duyar. Şu an sadece Notepad++ 6.0.9 sürümü mevcut (npp paket kodu ile).
-
-Açıklamadaki komutlar ile paket kaldırma, kurma, listeleme depo güncelleme gibi işlemleri yapabilmektedir.
+Demo Installing
+---------------
+Throw /server files to your virtual server directory or anywhere can be run as server root. Edit url string in updateRepositories.js file as your local server url. At first run may will necessary need to run as administrator for the first creation of directory and files.

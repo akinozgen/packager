@@ -6,38 +6,38 @@ const easyTable = require('easy-table')
 var getVersions = function (code, options)
 {
     var index = 1
-    var pack = new Package(code, 'remote')
+    var pack = new Package(code, 'remote', undefined, undefined, options)
     if ( ! pack.isExists())
     {
         require('log-timestamp')
-        console.log('Paket bulunamadı.'.yellow)
+        console.log('Package Not Found.'.yellow)
         process.exit(1)
     }
 
     var tableData = pack.versions
     var table = new easyTable
 
-    if (Object.keys(tableData).length > 0 && options.parent.tip == 'konsol')
+    if (Object.keys(tableData).length > 0 && options.parent.type == 'konsol')
     {
         Object.keys(tableData).forEach(function (key) {
             var version = tableData[key]
-            table.cell('Kod'.cyan, (key).cyan)
-            table.cell('Açıklama'.green, version.description)
-            table.cell('İndirme Linki'.green, version.download)
+            table.cell('Code'.cyan, (key).cyan)
+            table.cell('Description'.green, version.description)
+            table.cell('Download Link'.green, version.download)
             table.newRow()
         })
         console.log(table.toString())
     }
-    else if (Object.keys(tableData).length > 0 && options.parent.tip == 'handler')
+    else if (Object.keys(tableData).length > 0 && options.parent.type == 'handler')
     {
         // output
     }
     else
     {
-        if (options.parent.tip == 'konsol')
+        if (options.parent.type == 'konsol')
         {
             require('log-timestamp')
-            console.log('Bu pakete ait sürüm bulunamadı. Bu paket kurulamaz.')
+            console.log('Not a version found of this package. It cant be install.')
         }
         else
         {

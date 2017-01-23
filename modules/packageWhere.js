@@ -6,15 +6,15 @@ var packageWhere = function (code, options) {
     if (packages[code])
     {
         var requested = packages[code]
-        if (options.parent.tip == 'konsol')
-            console.log('\n' + requested.name + ' paketinin kurulu olduğu dizin: ', requested.installation_path)
+        if (options.parent.type == 'konsol')
+            console.log('\n' + requested.name + ' is installed on: ', requested.installation_path)
         else
             console.log('PATH:' + requested.installation_path)
     }
     else
     {
-        if (options.parent.tip == 'konsol')
-            console.log("\nUyarı".yellow, "Belirtilen paket zaten kurulu değil.")
+        if (options.parent.type == 'konsol')
+            console.log("\nUyarı".yellow, "It ain't installed.")
         else
             console.log('NOTINSTALLED')
     }
