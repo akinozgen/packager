@@ -4,7 +4,7 @@ const fs = require('fs')
 var updateRepositories = function(options)
 {
 	var url = "http://projects.app/packager/server/packages/packages.json"
-	var file = fs.createWriteStream(__dirname + "/../latest.json")
+	var file = fs.createWriteStream(process.env.PROGRAMS + '\\repository.json')
 
 	var req = request.get(url)
 	req.on('error', function (err) {

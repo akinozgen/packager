@@ -1,17 +1,28 @@
-const jsonFile = require('jsonfile')
-const Package = require('./package')
-const easyTable = require('easy-table')
 const js2xmlparser = require('js2xmlparser')
+const easyTable = require('easy-table')
+const Package = require('./package')
+const progress = require('progress')
+const jsonFile = require('jsonfile')
 
 var search = function (string, options)
 {
 
     var found = {}
-    var packages = jsonFile.readFileSync(__dirname + '/../latest.json').packages
+    var packages = jsonFile.readFileSync(process.env.PROGRAMS + '\\repository.json').packages
+    var len = Object.keys(packages).length
 
+    var progressBar = new progress('Searching in the repository [:bar] :percent :etas', {
+        complete: '#',
+        incomplete: '-',
+        width: 40,
+        total: len
+    })
+
+    console.log()// Before the progressBar
     Object.keys(packages).forEach(function (key) {
+        progressBar.tick(1)
         var package = new Package(key, 'remote', undefined, undefined, options)
-        var searchIn = ('|' + package.name + '|' + package.provider + '|' + package.website + '|');
+        var searchIn = ('|' + key + package.name + '|' + package.provider + '|' + package.website + '|');
 
         Object.keys(package.versions).forEach(function (ver) {
             searchIn += (package.versions[ver].description + '|')
@@ -35,7 +46,7 @@ var search = function (string, options)
         if (options.parent.type == 'konsol')
         {
             var table = new easyTable
-
+            console.log() // After the progressBar
             Object.keys(found).forEach(function (key) {
                 var package = found[key]
                 table.cell('Code'.cyan, (key).cyan)
