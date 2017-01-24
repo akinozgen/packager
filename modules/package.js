@@ -11,6 +11,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
     this.name              = ''
     this.version           = ''
     this.provider          = ''
+    this.website           = ''
     this.executable        = ''
     this.installation_path = ''
     this.versions          = {}
@@ -23,6 +24,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
         {
             this.name              = this.latest.packages[code].name
             this.versions          = this.latest.packages[code].versions
+            this.website           = this.latest.packages[code].website
             this.provider          = this.latest.packages[code].provider
             this.executable        = this.latest.packages[code].executable
             if (typeof version != 'undefined')
@@ -43,6 +45,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
         {
             this.name              = this.installed.packages[code].name
             this.provider          = this.installed.packages[code].provider
+            this.website           = this.installed.packages[code].website
             this.executable        = this.installed.packages[code].executable
             this.installation_path = this.installed.packages[code].installation_path
             if (typeof version != 'undefined')

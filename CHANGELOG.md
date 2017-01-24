@@ -1,3 +1,7 @@
+24.01.2017
+----------
+1. Added search option
+
 22.01.2017
 ----------
 1. A Handler app written with c# for catching and processing URI commands.

@@ -17,6 +17,7 @@ Actives
 8. List versions of specified package
 9. Update repository
 10. Run commands with URI strings (like packager://run/npp)
+11. Searh into repository
 
 Using
 -----
@@ -24,7 +25,7 @@ Using
 
 
 ```
-Usage: packager [options] [command]
+  Usage: packager [options] [command]
 
 
   Commands:
@@ -37,19 +38,19 @@ Usage: packager [options] [command]
     where <package_code>                          Show specified package's installation directory.
     whatsnew                                      Show installable packages.
     versions <package_code>                       Lists specified packages's versions and descriptions.
+    search <string>                               Searches in repository
 
   Options:
 
     -h, --help         output usage information
     -V, --version      output the version number
-    -t, --type <type>  Output Type (konsol or handler)                                 
+    -t, --type <type>  Output Type (konsol or handler)                                
 ```
 
 Will Be Add In Future
 =====================
 1. Active Server (PHP)
 2. Make shortcuts, create, edit and delete registry enteries with handler.
-3. Search in repository
 
 Demo Installing
 ---------------

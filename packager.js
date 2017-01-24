@@ -8,6 +8,7 @@ const pkg     = require('./package.json');
 // My Modules
 var installed = require('./modules/init')();
 const run     = require('./modules/run');
+const search  = require('./modules/search');
 const Package = require('./modules/package');
 const getVersions    = require('./modules/getVersions');
 const packageWhere   = require('./modules/packageWhere');
@@ -64,5 +65,9 @@ program.command('whatsnew')
 program.command('versions <package_code>')
     .description('Lists specified packages\'s versions and descriptions.')
     .action(getVersions)
+
+program.command('search <string>')
+    .description('Searches in repository')
+    .action(search)
 
 program.parse(process.argv)
