@@ -7,6 +7,7 @@ const pkg     = require('./package.json')
 
 // My Modules
 var installed = require('./modules/init')()
+const Output  = require('./modules/output')
 const run     = require('./modules/run')
 const link    = require('./modules/link')
 const search  = require('./modules/search')
@@ -74,5 +75,11 @@ program.command('search <string>')
 program.command('link <code>')
     .description('Make shortcut to desktop')
     .action(link)
+
+program.command('test <string>')
+    .description('Test some things')
+    .action(function (string, options) {
+        // Test Area
+    })
 
 program.parse(process.argv)
