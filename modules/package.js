@@ -1,10 +1,12 @@
 const fs = require('fs')
-const exec = require('child_process').exec;
-const request = require('request')
+const exec = require('child_process').exec
 const unzip = require('unzip')
 const fstream = require('fstream')
+const md5File = require('md5-file')
+const request = require('request')
 const jsonFile = require('jsonfile')
-const ProgressBar = require('progress');
+const ProgressBar = require('progress')
+const updateRepositories = require('./updateRepositories')
 
 var package = function (code, fromWhere, toWhere, version, options) {
 
@@ -71,9 +73,20 @@ var package = function (code, fromWhere, toWhere, version, options) {
             return false
     }
 
+    this.compare = function (file, hash)
+    {
+        var hashed = md5File.sync(file)
+
+        if (hashed == hash)
+            return true
+        else
+            return false
+    }
+
     this.downloadAndInstall = function (callback)
     {
         var url       = this.versions[this.version].download
+        var hash      = this.versions[this.version].hash
         var temporary = (process.env.TEMP + '\\' + this.name + '-' + this.version + '.zip')
         var file      = fs.createWriteStream(temporary)
 
@@ -106,6 +119,12 @@ var package = function (code, fromWhere, toWhere, version, options) {
         })
         req.on('end', function () {
             callback((this.name + " is being downlaoded temporary directory.").green, 'DOWNLOADED')
+
+            if ( ! this.compare(temporary, hash)) // Compare file and hash
+            {
+                callback('Downloaded file is wrong. Try again', 'FILEWRONG')
+                process.exit(1)
+            }
 
             // Unzip Begin
             callback('Extractation begin.'.cyan, 'EXTRACTBEGIN')

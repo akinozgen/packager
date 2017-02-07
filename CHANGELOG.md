@@ -1,6 +1,7 @@
 24.01.2017
 ----------
 1. Added search option
+2. Added downloaded file check via md5 hash
 
 22.01.2017
 ----------
