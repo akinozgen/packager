@@ -95,12 +95,12 @@ var package = function (code, fromWhere, toWhere, version, options) {
 
         var req = request.get(url)
         req.on('response', function (response) {
-            callback(('Conneection eastabilished. Code: ' + response.statusCode).green, 'CONNECTIONESTABILISHED')
-            callback((this.name + " downloading to temporary directory.").cyan, 'DOWNLOADING')
+            callback(('Connection estabilished. Code: %s').green, [response.statusCode])
+            callback(('%s downloading to temporary directory.').cyan, [this.name])
 
             var len = parseInt(response.headers['content-length'], 10)
 
-            var bar = new ProgressBar('Downlaoded [:bar] :percent :etas', {
+            var bar = new ProgressBar('Downloaded [:bar] :percent :etas', {
                 complete: '#',
                 incomplete: '-',
                 width: '60',
@@ -109,28 +109,27 @@ var package = function (code, fromWhere, toWhere, version, options) {
 
             response.on('data', function (data) {
                 try {
-                    if (options.parent.type == 'konsol')
-                        bar.tick(data.length)
+                    bar.tick(data.length)
                 } catch (err) {
-                    callback(('Connection error. Error Code: ' + err).red, 'CONNECTIONERROR')
+                    callback(('Connection error. Error Code: %s').red, [err])
                     process.exit(1)
                 }
             }.bind(this))
         }.bind(this))
         req.on('error', function (err) {
-            callback(('Connection error. Error Code: ' + err.code).red, 'CONNECTIONERROR')
+            callback(('Connection error. Error Code: %s').red, [err.code])
         })
         req.on('end', function () {
-            callback((this.name + " is being downlaoded temporary directory.").green, 'DOWNLOADED')
+            callback(('%s is being downlaoded temporary directory.').green, [this.name])
 
             if ( ! this.compare(temporary, hash)) // Compare file and hash
             {
-                callback('Downloaded file is wrong. Try again', 'FILEWRONG')
+                callback('Downloaded file is wrong. Try again')
                 process.exit(1)
             }
 
             // Unzip Begin
-            callback('Extractation begin.'.cyan, 'EXTRACTBEGIN')
+            callback('Extractation begin.'.cyan)
             if ( ! fs.existsSync(this.installation_path) )
                 fs.mkdirSync(this.installation_path)
 
@@ -138,9 +137,9 @@ var package = function (code, fromWhere, toWhere, version, options) {
             var write = fstream.Writer(this.installation_path)
 
             read.pipe(unzip.Parse()).pipe(write)
-            callback('Extractation sucessfully completed.'.green, 'EXTRACTSUCCESS')
+            callback('Extractation sucessfully completed.'.green)
             // Unzip End | Register Begin
-            callback('Packge registering local repository.'.cyan, 'REGISTERING')
+            callback('Packge registering local repository.'.cyan)
             this.installed.packages[code] = this.latest.packages[code]
             this.installed.packages[code]['version'] = this.version
             this.installed.packages[code]['installation_path'] = this.installation_path
@@ -148,7 +147,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
             // console.log(this.installed)
             jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', this.installed)
             // Register End
-            callback('Registeration complete. Package installed correctly.'.green, 'INSTALLEDSUCCESSFULLY')
+            callback('Registeration complete. Package installed correctly.'.green)
         }.bind(this)).pipe(file)
     }
 
@@ -156,27 +155,27 @@ var package = function (code, fromWhere, toWhere, version, options) {
     {
         if (fs.existsSync(this.installation_path))
             exec('rmdir /s /q "' + this.installation_path + '"', function () {
-                callback('Local files deleted.'.green, 'LOCALDELETED')
+                callback('Local files deleted.'.green)
 
                 delete this.installed.packages[code]
                 jsonFile.writeFile(process.env.PROGRAMS + '\\installed.json', this.installed, function (err) {
                     if (err)
                         callback(err)
                     else
-                        callback('Registeration removed.'.green, 'REGISTERYDELETED')
+                        callback('Registeration removed.'.green)
                 }.bind(this))
 
             }.bind(this))
         else
-            callback('Local files missing.'.red, 'LOCALFILESMISSING')
+            callback('Local files missing.'.red)
     }
 
     this.run = function (callback)
     {
         var executable = ('"' + String(this.installation_path + this.executable).replace('/', '\\') + '"')
-        callback(('Running: ' + this.name).green, 'RUNNING')
+        callback(('Running: %s').green, [this.name])
         exec(executable, function () {
-            callback(('Terminated: ' + this.name).yellow, undefined)
+            callback(('Terminated: %s').yellow, [this.name])
         }.bind(this))
     }
 }

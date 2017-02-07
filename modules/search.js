@@ -1,12 +1,14 @@
 const js2xmlparser = require('js2xmlparser')
-const easyTable = require('easy-table')
-const progress = require('progress')
-const jsonFile = require('jsonfile')
-const Package = require('./package')
+const Output       = require('./output')
+const easyTable    = require('easy-table')
+const progress     = require('progress')
+const jsonFile     = require('jsonfile')
+const Package      = require('./package')
 
 var search = function (string, options)
 {
 
+    var out  = new Output(options)
     var found = {}
     var packages = jsonFile.readFileSync(process.env.PROGRAMS + '\\repository.json').packages
     var len = Object.keys(packages).length
@@ -18,7 +20,6 @@ var search = function (string, options)
         total: len
     })
 
-    console.log()// Before the progressBar
     Object.keys(packages).forEach(function (key) {
         progressBar.tick(1)
         var package = new Package(key, 'remote', undefined, undefined, options)
@@ -47,7 +48,6 @@ var search = function (string, options)
         if (options.parent.type == 'konsol')
         {
             var table = new easyTable
-            console.log() // After the progressBar
             Object.keys(found).forEach(function (key) {
                 var package = found[key]
                 table.cell('Code'.cyan, (key).cyan)
@@ -58,25 +58,19 @@ var search = function (string, options)
                 table.cell('Website'.green, package.website)
                 table.newRow()
             })
-            console.log(table.toString())
+            out.prepare(table.toString(), undefined, {'timestamp':false})
         }
         else
         {
-            console.log(js2xmlparser.parse('packages', found))
+            out.prepare(js2xmlparser.parse('packages', found), undefined, {'timestamp':false})
         }
     }
     else
     {
-        if (options.parent.type == 'konsol')
-        {
-            console.log()
-            require('log-timestamp')
-            console.log('No packages found.'.yellow)
-        }
-        else
-            console.log('NOPACKAGESFOUND')
+        out.prepare('No packages found.'.yellow)
     }
 
+    out.out()
 }
 
 module.exports = search

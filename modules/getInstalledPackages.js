@@ -1,11 +1,13 @@
 const colors = require('colors')
+const Output = require('./output')
 const jsonFile = require('jsonfile')
 const easyTable = require('easy-table')
 const js2xmlparser = require('js2xmlparser')
 
 var getInstalledPackages = function (options) {
-    var installed = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json')
-    var tableData = installed.packages
+    var out              = new Output(options)
+    var installed        = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json')
+    var tableData        = installed.packages
 
     var table = new easyTable
 
@@ -21,20 +23,18 @@ var getInstalledPackages = function (options) {
             table.cell('Website'.green, package.website)
             table.newRow()
         });
-        console.log(table.toString())
+        out.prepare(table.toString(), undefined, {'timestamp': false})
     }
     else if (Object.keys(tableData).length > 0 && options.parent.type == 'handler')
     {
-        console.log(js2xmlparser.parse("packages", tableData))
+        out.prepare(js2xmlparser.parse("packages", tableData), undefined, {'timestamp': false})
     }
     else
     {
-        if (options.parent.type == 'konsol')
-            console.log('\nWarning: '.yellow, 'No package found installed.')
-        else
-            console.log('NOPACKAGEINSTALLED')
+        out.prepare('Warning: '.yellow + 'No package found installed.')
     }
 
+    out.out()
 }
 
 module.exports = getInstalledPackages

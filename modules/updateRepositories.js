@@ -1,27 +1,21 @@
+const fs      = require('fs')
+const Output  = require('./output')
 const request = require('request')
-const fs = require('fs')
 
 var updateRepositories = function(options)
 {
-	var url = "http://projects.app/packager/server/packages/packages.json"
+    var out  = new Output(options)
+	var url  = "http://projects.app/packager/server/packages/packages.json"
 	var file = fs.createWriteStream(process.env.PROGRAMS + '\\repository.json')
 
 	var req = request.get(url)
 	req.on('error', function (err) {
-		if (options.parent.type == 'konsol')
-			console.log(('Connection error: ' + err).red)
-		else
-			console.log('CONNECTIONERROR')
+		out.prepare(('Connection error: %s').red, [err])
+		out.out()
 	})
 	req.on('end', function () {
-		if (options.parent.type == 'konsol')
-		{
-			console.log()
-			require('log-timestamp')
-			console.log('Local repository updated.'.green)
-		}
-		else
-			console.log('UPDATED')
+		out.prepare('Local repository updated.'.green)
+		out.out()
 	}).pipe(file)
 
 }

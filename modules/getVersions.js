@@ -1,24 +1,23 @@
-const colors = require('colors')
-const Package = require('./package')
-const jsonFile = require('jsonfile')
-const easyTable = require('easy-table')
+const colors       = require('colors')
+const Output       = require('./output')
+const Package      = require('./package')
+const jsonFile     = require('jsonfile')
+const easyTable    = require('easy-table')
 const js2xmlparser = require('js2xmlparser')
 
 var getVersions = function (code, options)
 {
-    var index = 1
-    var pack = new Package(code, 'remote', undefined, undefined, options)
+    var out    = new Output(options)
+    var pack   = new Package(code, 'remote', undefined, undefined, options)
     if ( ! pack.isExists())
     {
-        require('log-timestamp')
-        console.log('Package Not Found.'.yellow)
+        out.prepare('%s package not found.'.yellow, [code])
+        out.out()
         process.exit(1)
     }
 
     var tableData = pack.versions
     var table = new easyTable
-
-
 
     if (Object.keys(tableData).length > 0 && options.parent.type == 'konsol')
     {
@@ -29,7 +28,7 @@ var getVersions = function (code, options)
             table.cell('Download Link'.green, version.download)
             table.newRow()
         })
-        console.log(table.toString())
+        out.prepare(table.toString(), undefined, {'timestamp':false})
     }
     else if (Object.keys(tableData).length > 0 && options.parent.type == 'handler')
     {
@@ -39,21 +38,15 @@ var getVersions = function (code, options)
             delete tableData[key]
         })
 
-        console.log(js2xmlparser.parse("packages", tableData))
+        out.prepare(js2xmlparser.parse("packages", tableData), undefined, {'timestamp':false})
     }
     else
     {
-        if (options.parent.type == 'konsol')
-        {
-            require('log-timestamp')
-            console.log('Not a version found of this package. It cant be install.')
-        }
-        else
-        {
-            console.log('NOVERSIONFOUND')
-        }
+        out.prepare('Not a version found of this package. It cant be install.')
+        out.out()
         process.exit(1)
     }
+    out.out()
 }
 
 module.exports = getVersions

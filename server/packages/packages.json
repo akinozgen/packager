@@ -5,7 +5,7 @@
 			"version": "7.3.0",
 			"provider": "Notepad++Team",
 			"website": "https://notepad-plus-plus.org/",
-			"executable": "./notepad++.exe",
+			"executable": "\\notepad++.exe",
 			"categories": ["develope", "editor"],
 			"versions": {
 				"7.3.0": {

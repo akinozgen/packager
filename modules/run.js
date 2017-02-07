@@ -1,34 +1,28 @@
-var Package = require('./package')
+const Package = require('./package')
+const Output  = require('./output')
 
 var run = function (code, options)
 {
-    if (options.parent.type == 'konsol')
-        require('log-timestamp')
+    var out  = new Output(options)
     var pack = new Package(code, 'local', undefined, undefined, options)
 
     if ( ! pack.isExists())
     {
-        if (options.parent.type == 'konsol')
-            console.log('Package not found.'.yellow)
-        else
-            console.log('PACKAGENOTFOUND')
+        out.prepare('Package not found.'.yellow)
+        out.out()
         process.exit(1)
     }
 
     if ( ! pack.isInstalled())
     {
-        if (options.parent.type == 'konsol')
-            console.log("It ain't installed".yellow)
-        else
-            console.log('NOTINSTALLED')
+        out.prepare("It is not installed".yellow)
+        out.out()
         process.exit(1)
     }
 
     pack.run(function (message, code) {
-        if (options.parent.type == 'konsol')
-            console.log(message)
-        else
-            console.log(code)
+        out.prepare(message, code)
+        out.out()
     })
 }
 

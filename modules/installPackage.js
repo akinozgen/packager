@@ -1,43 +1,35 @@
-const Package = require('./package');
+const Output  = require('./output')
+const Package = require('./package')
 
 var installPackage = function (code, version, destination, options) {
 
-    if (options.parent.type == 'konsol')
-        require('log-timestamp')
-
+    var out  = new Output(options)
     var pack = new Package(code, 'remote', destination, version, options)
 
     if ( ! pack.isExists())
     {
-        if (options.parent.type == 'konsol')
-            console.log('Package not found.'.yellow)
-        else
-            console.log('PACKAGENOTFOUND')
+        out.prepare('Package not found.'.yellow)
+        out.out()
         process.exit(1)
     }
     else
     {
-        if (options.parent.type == 'konsol')
-            console.log('Package found. It will be install soon'.green)
-        else
-            console.log('PACKAGEFOUND')
+        out.prepare('Package found. It will be install soon'.green)
+        out.out()
     }
 
     if (pack.isInstalled())
     {
-        if (options.parent.type == 'konsol')
-            console.log('This package allready installed.'.yellow)
-        else
-            console.log('ALREADYINSTALLED')
+        out.prepare('This package allready installed.'.yellow)
+        out.out()
         process.exit(1)
     }
 
     pack.downloadAndInstall(function (message, code) {
-        if (options.parent.type == 'konsol')
-            console.log(message)
-        else
-            console.log(code)
+        out.prepare(message, code)
+        out.out()
     })
-};
 
-module.exports = installPackage;
+}
+
+module.exports = installPackage
