@@ -17,6 +17,7 @@ var getInstalledPackages = function (options) {
             table.cell('Name'.green, package.name)
             table.cell('Version'.green, package.version)
             table.cell('Provider'.green, package.provider)
+            table.cell('Categories'.green, JSON.stringify(package.categories))
             table.cell('Website'.green, package.website)
             table.newRow()
         });

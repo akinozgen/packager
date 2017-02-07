@@ -18,6 +18,7 @@ Actives
 9. Update repository
 10. Run commands with URI strings (like packager://run/npp)
 11. Searh into repository
+12. Create desktop shortcut
 
 Using
 -----
@@ -50,7 +51,7 @@ Using
 Will Be Add In Future
 =====================
 1. Active Server (PHP)
-2. Make shortcuts, create, edit and delete registry enteries with handler.
+2. Make create, edit and delete registry enteries with handler.
 
 Demo Installing
 ---------------

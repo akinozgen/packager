@@ -1,3 +1,7 @@
+07.02.2017
+----------
+1. Added link command for create desktop shorcuts
+
 24.01.2017
 ----------
 1. Added search option

@@ -33,11 +33,12 @@ var search = function (string, options)
         if (searchIn.toLowerCase().search(string.toLowerCase()) > -1)
         {
             found[key] = {}
-            found[key]['code'] = key
-            found[key]['name'] = package.name
-            found[key]['version'] = package.version
-            found[key]['provider'] = package.provider
-            found[key]['website'] = package.website
+            found[key]['code']       = key
+            found[key]['name']       = package.name
+            found[key]['version']    = package.version
+            found[key]['website']    = package.website
+            found[key]['provider']   = package.provider
+            found[key]['categories'] = package.categories
         }
     })
 
@@ -53,6 +54,7 @@ var search = function (string, options)
                 table.cell('Name'.green, package.name)
                 table.cell('Version'.green, package.version)
                 table.cell('Provider'.green, package.provider)
+                table.cell('Categories'.green, JSON.stringify(package.categories))
                 table.cell('Website'.green, package.website)
                 table.newRow()
             })

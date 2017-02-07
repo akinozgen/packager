@@ -1,22 +1,23 @@
 #!/usr/bin/env node
-'use strict';
+'use strict'
 // Node Modules
-const program = require('commander');
-const url     = require('url');
-const pkg     = require('./package.json');
+const program = require('commander')
+const url     = require('url')
+const pkg     = require('./package.json')
 
 // My Modules
-var installed = require('./modules/init')();
-const run     = require('./modules/run');
-const search  = require('./modules/search');
-const Package = require('./modules/package');
-const getVersions    = require('./modules/getVersions');
-const packageWhere   = require('./modules/packageWhere');
-const showPackages   = require('./modules/showPackages');
-const installPackage = require('./modules/installPackage');
-const removePackages = require('./modules/removePackages.js');
-const updateRepositories   = require('./modules/updateRepositories');
-const getInstalledPackages = require('./modules/getInstalledPackages');
+var installed = require('./modules/init')()
+const run     = require('./modules/run')
+const link    = require('./modules/link')
+const search  = require('./modules/search')
+const Package = require('./modules/package')
+const getVersions    = require('./modules/getVersions')
+const packageWhere   = require('./modules/packageWhere')
+const showPackages   = require('./modules/showPackages')
+const installPackage = require('./modules/installPackage')
+const removePackages = require('./modules/removePackages.js')
+const updateRepositories   = require('./modules/updateRepositories')
+const getInstalledPackages = require('./modules/getInstalledPackages')
 
 if (process.argv[2])
 {
@@ -69,5 +70,9 @@ program.command('versions <package_code>')
 program.command('search <string>')
     .description('Searches in repository')
     .action(search)
+
+program.command('link <code>')
+    .description('Make shortcut to desktop')
+    .action(link)
 
 program.parse(process.argv)

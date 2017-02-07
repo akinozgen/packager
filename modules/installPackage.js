@@ -1,7 +1,7 @@
 const Package = require('./package');
 
 var installPackage = function (code, version, destination, options) {
-    console.log('\r');
+
     if (options.parent.type == 'konsol')
         require('log-timestamp')
 
