@@ -25,10 +25,13 @@ var output = function (options)
             out += val + this.variables[index]
         }.bind(this))
 
-        if (this.options.timestamp == true)
-            require('log-timestamp')
 
-        console.log(out)
+        if (out != '')
+        {
+            if (this.options.timestamp == true)
+                require('log-timestamp')
+            console.log(out)
+        }
     }
 }
 

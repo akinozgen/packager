@@ -1,6 +1,12 @@
+10.02.2017
+----------
+1. Empty output line issue from output class solved.
+2. Iconless link issue solved. Gave up from internet shortcut, used symlink...
+
 07.02.2017
 ----------
 1. Added link command for create desktop shorcuts
+2. Outputs are managing with Output() class.
 
 24.01.2017
 ----------
@@ -9,16 +15,16 @@
 
 22.01.2017
 ----------
-1. A Handler app written with c# for catching and processing URI commands.
-2. Created special output for handler.
-3. Handler can be process this output and show a summary.
-4. Created a logo and icon. Handler uses this icon so empty packager:// shortcuts have a default packager icon.
+1. A Handler app has written with c# for catching and processing URI commands.
+2. Created special outputs for handler.
+3. Handler can be process this outputs and show a summary.
+4. Created a logo and icon. Handler uses this icon, so empty 'packager://' shortcuts have a default packager icon.
 
 
 19.01.2017
 ----------
-1. Run command
-2. Catching and processing URI commands.
+1. Run command added
+2. Now it can catch and process URI commands.
 
 
 17.01.2017
@@ -26,8 +32,8 @@
 1. A progress bar added for install command.
 2. At install can be define a specified version.
 3. Whatsnew command for showing uninstalled packages.
-4. Package code column added table lists.
-5. Versions of a package command. Repository version structure changed.
+4. Package code column added to table lists.
+5. Versions of about a package command added. Repository version structure has changed.
 
 
 14.01.2017
