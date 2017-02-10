@@ -6,17 +6,15 @@ var link = function (code, options)
 {
     var out        = new Output(options)
     let pack       = new Package(code, 'local', undefined, undefined, options)
-    let desktop    = (process.env.USERPROFILE + '\\Desktop\\')
-    let executable = (String(pack.installation_path + pack.executable).replace('/', '\\'))
-    let content    = '[InternetShortcut]\nIDList=\nURL=packager://run/' + code + '\nIconIndex=0\nHotKey=0\nIconFile=' + executable + '\n[InternetShortcut.A]\nIconFile='  +executable + '\n[InternetShortcut.W]\nIconFile=' + executable
+    let desktop    = (process.env.USERPROFILE + '\\Desktop\\' + pack.name)
 
     if (pack.isExists())
         if (pack.isInstalled())
-            fs.writeFile(desktop + pack.name + '.url', content, function (err) {
-                if (typeof err != 'null')
-                    out.prepare('Link created successfully.'.green)
-                else
-                    out.prepare('There is an error has occured.'.red)
+            fs.symlink(pack.installation_path + pack.executable, desktop, function (res) {
+                if (res && res['code'] == 'EPERM')
+                    out.prepare('This operation requires Administration permissions.'.red)
+                else if (res && res['code'] == 'EEXIST')
+                    out.prepare('Link exists.'.yellow)
 
                 out.out()
             })
