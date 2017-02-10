@@ -1,2 +1,6 @@
 @echo off
-node "D:\.dev\CurrentProjects\packager\packager.js" %1 %2 %3 %4
+@IF EXIST "%~dp0\node.exe" (
+	"%~dp0\node.exe" "%~dp0\packager.js" %*
+) ELSE (
+	node.exe "%~dp0\packager.js" %*
+)
