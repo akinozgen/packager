@@ -2,6 +2,7 @@
 ----------
 1. Empty output line issue from output class solved.
 2. Iconless link issue solved. Gave up from internet shortcut, used symlink...
+3. After installation tasks designed, runner method created...
 
 07.02.2017
 ----------
@@ -34,7 +35,6 @@
 3. Whatsnew command for showing uninstalled packages.
 4. Package code column added to table lists.
 5. Versions of about a package command added. Repository version structure has changed.
-
 
 14.01.2017
 ----------

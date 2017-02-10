@@ -18,6 +18,25 @@
 					"download": "http://projects.app/packager/server/downloads/npp.6.9.bin.zip",
 					"hash": "a5bfc22c048473d7099d9800ff79441a"
 				}
+			},
+			"after": {
+				"registry": [
+					{
+						"title": "ANotepad++64",
+						"command": "Windows Registry Editor Version 5.00\n\n[HKEY_CLASSES_ROOT\\CLSID\\{B298D29A-A6ED-11DE-BA8C-A68E55D89593}]\n@=\"ANotepad++64\"\n\n[HKEY_CLASSES_ROOT\\CLSID\\{B298D29A-A6ED-11DE-BA8C-A68E55D89593}\\InprocServer32]\n@=\"C:\\Program Files (x86)\\Notepad++\\NppShell_06.dll\"\n\"ThreadingModel\"=\"Apartment\"\n\n[HKEY_CLASSES_ROOT\\CLSID\\{B298D29A-A6ED-11DE-BA8C-A68E55D89593}\\Settings]\n\"Title\"=\"Edit with &Notepad++\"\n\"Path\"=\"C:\\Program Files (x86)\\Notepad++\\notepad++.exe\"\n\"Custom\"=\"\"\n\"ShowIcon\"=dword:00000001\n\"Dynamic\"=dword:00000001\n\"Maxtext\"=dword:00000019\n[HKEY_CLASSES_ROOT\\*\\shellex\\ContextMenuHandlers\\ANotepad++64]\n@=\"{B298D29A-A6ED-11DE-BA8C-A68E55D89593}\""
+					}
+				],
+				"shortcuts": [
+					{
+						"directory": "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Notepad++",
+						"shortcuts": [
+							{
+								"name": "Notepad++",
+								"source": "\\notepad++.exe"
+							}
+						]
+					}
+				]
 			}
 		}
 	}

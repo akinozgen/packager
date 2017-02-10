@@ -18,6 +18,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
     this.installation_path = ''
     this.versions          = {}
     this.categories        = []
+    this.after             = {}
     this.latest            = jsonFile.readFileSync(process.env.PROGRAMS + '\\repository.json')
     this.installed         = jsonFile.readFileSync(process.env.PROGRAMS + '\\installed.json')
 
@@ -26,6 +27,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
         if (typeof this.latest.packages[code] != 'undefined')
         {
             this.name              = this.latest.packages[code].name
+            this.after             = this.latest.packages[code].after
             this.versions          = this.latest.packages[code].versions
             this.website           = this.latest.packages[code].website
             this.provider          = this.latest.packages[code].provider
@@ -48,6 +50,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
         if (typeof this.installed.packages[code] != 'undefined')
         {
             this.name              = this.installed.packages[code].name
+            this.after             = this.installed.packages[code].after
             this.provider          = this.installed.packages[code].provider
             this.website           = this.installed.packages[code].website
             this.executable        = this.installed.packages[code].executable
@@ -100,7 +103,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
 
             var len = parseInt(response.headers['content-length'], 10)
 
-            var bar = new ProgressBar('Downloaded [:bar] :percent :etas', {
+            var bar = new ProgressBar('[-------------:--:--.----] Downloaded [:bar] :percent :etas', {
                 complete: '#',
                 incomplete: '-',
                 width: '60',
@@ -146,9 +149,62 @@ var package = function (code, fromWhere, toWhere, version, options) {
             delete this.installed.packages[code]['versions']
             // console.log(this.installed)
             jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', this.installed)
-            // Register End
+            // Register End | After Installation Begin
+            callback('Running after installation tasks.'.cyan)
+            this.doAfter(function (mes) {
+                callback(mes)
+            })
             callback('Registeration complete. Package installed correctly.'.green)
         }.bind(this)).pipe(file)
+    }
+
+    this.doAfter = function (callback)
+    {
+        let registry = this.after.registry
+        let shortcuts = this.after.shortcuts
+
+        // Check is registry task exists
+        if (Object.keys(registry).length > 0)
+            // Each registry tasks
+            Object.keys(registry).forEach(function (key, index) {
+                if (typeof registry[key].title != 'undefined')
+                {
+                    let tmpRegFile = this.installation_path + '\\' + this.name + '.reg'
+                    fs.createWriteStream(tmpRegFile)
+                    fs.writeFileSync(tmpRegFile, registry[key].command)
+                    exec('reg import "' + tmpRegFile + '"', function (res) {
+                        callback(('Registry: ' + res).cyan)
+                    })
+                }
+            }.bind(this))
+        // Registry Done | Check is shortcuts task exists
+        if (Object.keys(shortcuts).length > 0)
+            // Each shortcut tasks
+            Object.keys(shortcuts).forEach(function (key, index) {
+                // Building @realpath
+                let dir = process.env.USERPROFILE + '\\' + shortcuts[key].directory
+                // Create @realpath if not exists
+                if (typeof shortcuts[key].directory != 'undefined')
+                    if ( ! fs.existsSync(dir))
+                        fs.mkdirSync(dir)
+                // Directories Done | Check if shortcts exists
+                if (Object.keys(shortcuts[key]['shortcuts']).length > 0)
+                    // Each shortcuts of @realpath
+                    Object.keys(shortcuts[key]['shortcuts']).forEach(function (skey, index) {
+                        // Find installation_path\executable_file
+                        let src = (this.installation_path + shortcuts[key]['shortcuts'][skey].source)
+                        // Find @realpath\target_source_file
+                        let dst = (process.env.USERPROFILE + '\\' + shortcuts[key].directory + '\\' + shortcuts[key]['shortcuts'][skey].name)
+                        // Link them
+                        fs.symlink(src, dst, function (res) {
+                            // Check Administration error
+                            if (res && res['code'] == 'EPERM')
+                                callback('This operation requires Administration permissions.'.red)
+                        })
+                    }.bind(this))
+                // Directory Shortcuts Done
+            }.bind(this))
+        // Shortcuts Done
     }
 
     this.remove = function (callback)
