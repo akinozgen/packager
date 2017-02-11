@@ -169,7 +169,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
             Object.keys(registry).forEach(function (key, index) {
                 if (typeof registry[key].title != 'undefined')
                 {
-                    let tmpRegFile = this.installation_path + '\\' + this.name + '.reg'
+                    let tmpRegFile = process.env.TEMP + this.name + '.reg'
                     fs.createWriteStream(tmpRegFile)
                     fs.writeFileSync(tmpRegFile, registry[key].command)
                     exec('reg import "' + tmpRegFile + '"', function (res) {
