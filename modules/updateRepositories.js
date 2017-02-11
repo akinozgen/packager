@@ -5,7 +5,7 @@ const request = require('request')
 var updateRepositories = function(options)
 {
     var out  = new Output(options)
-	var url  = "http://projects.app/packager/server/packages/packages.json"
+	var url  = "http://192.168.2.125/packages/packages.json"
 	var file = fs.createWriteStream(process.env.PROGRAMS + '\\repository.json')
 
 	var req = request.get(url)

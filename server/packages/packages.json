@@ -10,12 +10,12 @@
 			"versions": {
 				"7.3.0": {
 					"description": "Açıklama işte",
-					"download": "http://projects.app/packager/server/downloads/npp.7.3.bin.zip",
+					"download": "http://192.168.2.125/downloads/npp.7.3.bin.zip",
 					"hash": "86482903e53c53bf1ce7937c50ce6ba7"
 				},
 				"6.9.0": {
 					"description": "Bu da açıklama",
-					"download": "http://projects.app/packager/server/downloads/npp.6.9.bin.zip",
+					"download": "http://192.168.2.125/downloads/npp.6.9.bin.zip",
 					"hash": "a5bfc22c048473d7099d9800ff79441a"
 				}
 			},
