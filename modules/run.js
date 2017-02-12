@@ -8,14 +8,14 @@ var run = function (code, options)
 
     if ( ! pack.isExists())
     {
-        out.prepare('Package not found.'.yellow)
+        out.prepare('PACKAGENOTFOUND', [code])
         out.out()
         process.exit(1)
     }
 
     if ( ! pack.isInstalled())
     {
-        out.prepare("It is not installed".yellow)
+        out.prepare('NOTINSTALLED', [pack.name])
         out.out()
         process.exit(1)
     }

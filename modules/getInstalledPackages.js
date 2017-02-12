@@ -31,7 +31,7 @@ var getInstalledPackages = function (options) {
     }
     else
     {
-        out.prepare('Warning: '.yellow + 'No package found installed.')
+        out.prepare('NOPACKAGEFOUND')
     }
 
     out.out()

@@ -67,7 +67,7 @@ var search = function (string, options)
     }
     else
     {
-        out.prepare('No packages found.'.yellow)
+        out.prepare('NOPACKAGEFOUND')
     }
 
     out.out()

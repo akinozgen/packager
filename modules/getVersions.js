@@ -11,7 +11,7 @@ var getVersions = function (code, options)
     var pack   = new Package(code, 'remote', undefined, undefined, options)
     if ( ! pack.isExists())
     {
-        out.prepare('%s package not found.'.yellow, [code])
+        out.prepare('PACKAGENOTFOUND', [code])
         out.out()
         process.exit(1)
     }
@@ -42,7 +42,7 @@ var getVersions = function (code, options)
     }
     else
     {
-        out.prepare('Not a version found of this package. It cant be install.')
+        out.prepare('NOVERSION')
         out.out()
         process.exit(1)
     }

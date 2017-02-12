@@ -19,9 +19,9 @@ var link = function (code, options)
                 out.out()
             })
         else
-            out.prepare('Package is not installed.'.yellow)
+            out.prepare('NOTINSTALLED', [pack.name])
     else
-        out.prepare('Package not found'.red)
+        out.prepare('PACKAGENOTFOUND', [code])
 
     out.out()
 }

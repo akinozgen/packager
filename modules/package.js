@@ -98,8 +98,8 @@ var package = function (code, fromWhere, toWhere, version, options) {
 
         var req = request.get(url)
         req.on('response', function (response) {
-            callback(('Connection estabilished. Code: %s').green, [response.statusCode])
-            callback(('%s downloading to temporary directory.').cyan, [this.name])
+            callback('CONNECTIONESTABILISHED', [response.statusCode])
+            callback('DOWNLOADING', [this.name])
 
             var len = parseInt(response.headers['content-length'], 10)
 
@@ -114,25 +114,25 @@ var package = function (code, fromWhere, toWhere, version, options) {
                 try {
                     bar.tick(data.length)
                 } catch (err) {
-                    callback(('Connection error. Error Code: %s').red, [err])
+                    callback('CONNECTIONERROR', [err])
                     process.exit(1)
                 }
             }.bind(this))
         }.bind(this))
         req.on('error', function (err) {
-            callback(('Connection error. Error Code: %s').red, [err.code])
+            callback('CONNECTIONERROR', [err.code])
         })
         req.on('end', function () {
-            callback(('%s is being downlaoded temporary directory.').green, [this.name])
+            callback('DOWNLOADED', [this.name])
 
             if ( ! this.compare(temporary, hash)) // Compare file and hash
             {
-                callback('Downloaded file is wrong. Try again')
+                callback('BROKENARCHIVE')
                 process.exit(1)
             }
 
             // Unzip Begin
-            callback('Extractation begin.'.cyan)
+            callback('BEGINEXTRACT')
             if ( ! fs.existsSync(this.installation_path) )
                 fs.mkdirSync(this.installation_path)
 
@@ -140,9 +140,9 @@ var package = function (code, fromWhere, toWhere, version, options) {
             var write = fstream.Writer(this.installation_path)
 
             read.pipe(unzip.Parse()).pipe(write)
-            callback('Extractation sucessfully completed.'.green)
+            callback('SUCCESSEXTRACT')
             // Unzip End | Register Begin
-            callback('Packge registering local repository.'.cyan)
+            callback('REGISTERBEGIN')
             this.installed.packages[code] = this.latest.packages[code]
             this.installed.packages[code]['version'] = this.version
             this.installed.packages[code]['installation_path'] = this.installation_path
@@ -150,11 +150,11 @@ var package = function (code, fromWhere, toWhere, version, options) {
             // console.log(this.installed)
             jsonFile.writeFileSync(process.env.PROGRAMS + '\\installed.json', this.installed)
             // Register End | After Installation Begin
-            callback('Running after installation tasks.'.cyan)
+            callback('AFTERTASKSRUN')
             this.doAfter(function (mes) {
                 callback(mes)
             })
-            callback('Registeration complete. Package installed correctly.'.green)
+            callback('SUCCESSEXTRACT')
         }.bind(this)).pipe(file)
     }
 
@@ -173,7 +173,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
                     fs.createWriteStream(tmpRegFile)
                     fs.writeFileSync(tmpRegFile, registry[key].command)
                     exec('reg import "' + tmpRegFile + '"', function (res) {
-                        callback(('Registry: ' + res).cyan)
+                        callback('REGISTRY', [String(res)])
                     })
                 }
             }.bind(this))
@@ -199,7 +199,7 @@ var package = function (code, fromWhere, toWhere, version, options) {
                         fs.symlink(src, dst, function (res) {
                             // Check Administration error
                             if (res && res['code'] == 'EPERM')
-                                callback('This operation requires Administration permissions.'.red)
+                                callback('ADMINREQUIRED')
                         })
                     }.bind(this))
                 // Directory Shortcuts Done
@@ -211,27 +211,27 @@ var package = function (code, fromWhere, toWhere, version, options) {
     {
         if (fs.existsSync(this.installation_path))
             exec('rmdir /s /q "' + this.installation_path + '"', function () {
-                callback('Local files deleted.'.green)
+                callback('LOCALREMOVED')
 
                 delete this.installed.packages[code]
                 jsonFile.writeFile(process.env.PROGRAMS + '\\installed.json', this.installed, function (err) {
                     if (err)
                         callback(err)
                     else
-                        callback('Registeration removed.'.green)
+                        callback('REGISTRYREMOVE')
                 }.bind(this))
 
             }.bind(this))
         else
-            callback('Local files missing.'.red)
+            callback('LOCALFILESMISSING')
     }
 
     this.run = function (callback)
     {
         var executable = ('"' + String(this.installation_path + this.executable).replace('/', '\\') + '"')
-        callback(('Running: %s').green, [this.name])
+        callback('RUNNING', [this.name])
         exec(executable, function () {
-            callback(('Terminated: %s').yellow, [this.name])
+            callback('TERMINATED', [this.name])
         }.bind(this))
     }
 }

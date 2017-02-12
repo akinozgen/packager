@@ -8,19 +8,19 @@ var installPackage = function (code, version, destination, options) {
 
     if ( ! pack.isExists())
     {
-        out.prepare('Package not found.'.yellow)
+        out.prepare('PACKAGENOTFOUND', [code])
         out.out()
         process.exit(1)
     }
     else
     {
-        out.prepare('Package found. It will be install soon'.green)
+        out.prepare('PACKAGEFOUND')
         out.out()
     }
 
     if (pack.isInstalled())
     {
-        out.prepare('This package allready installed.'.yellow)
+        out.prepare('INSTALLED')
         out.out()
         process.exit(1)
     }

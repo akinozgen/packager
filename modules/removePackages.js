@@ -8,7 +8,7 @@ var removePackages = function (code, options) {
 
     if ( ! pack.isInstalled())
     {
-        out.prepare('It is not installed.'.yellow)
+        out.prepare('NOTINSTALLED', [pack.name])
         out.out()
         process.exit(1)
     }

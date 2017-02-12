@@ -10,11 +10,11 @@ var updateRepositories = function(options)
 
 	var req = request.get(url)
 	req.on('error', function (err) {
-		out.prepare(('Connection error: %s').red, [err])
+		out.prepare('CONNECTIONERROR', [err])
 		out.out()
 	})
 	req.on('end', function () {
-		out.prepare('Local repository updated.'.green)
+		out.prepare('LOCALUPDATED')
 		out.out()
 	}).pipe(file)
 

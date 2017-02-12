@@ -35,7 +35,7 @@ var showPackages = function (options) {
     }
     else
     {
-        out.prepare('No Information'.yellow)
+        out.prepare('NOPACKAGEFOUND')
     }
 
     out.out()

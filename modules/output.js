@@ -1,11 +1,42 @@
 var output = function (options)
 {
-    this.variables = []
-    this.options   = {'timestamp':true}
-    this.pattern   = ''
+    this.pattern    = ''
+    this.variables  = []
+    this.options    = {'timestamp':true}
+    this.preDefined = {
+        'PACKAGENOTFOUND'        : ('%s package not found.'.yellow),
+        'NOPACKAGEFOUND'         : ('Warning: '.yellow + 'No package found installed.'.cyan),
+        'PACKAGEFOUND'           : ('Package found. It will be install soon'.green),
+        'NOVERSION'              : ('Not a version found of this package. It cant be install.'.yellow),
+        'INSTALLED'              : ('This package allready installed.'.yellow),
+        'NOTINSTALLED'           : ('%s package is not installed.'.yellow),
+        'ADMINREQUIRED'          : ('This operation requires Administration permissions.'.red),
+        'CONNECTIONERROR'        : ('Connection error. Error Code: %s'.red),
+        'CONNECTIONESTABILISHED' : ('Connection estabilished. Code: %s'.green),
+        'DOWNLOADING'            : ('%s downloading to temporary directory.'.cyan),
+        'DOWNLOADED'             : ('%s is being downlaoded temporary directory.'.green),
+        'BROKENARCHIVE'          : ('Downloaded file is wrong. Try again'.red),
+        'BEGINEXTRACT'           : ('Extractation begin.'.cyan),
+        'SUCCESSEXTRACT'         : ('Extractation sucessfully completed.'.green),
+        'REGISTERBEGIN'          : ('Packge registering local repository.'.cyan),
+        'AFTERTASKSRUN'          : ('Running after installation tasks.'.cyan),
+        'INSTALLSUCCESS'         : ('Registeration complete. Package installed correctly.'.green),
+        'REGISTRY'               : ('Registry: %s'.cyan),
+        'LOCALREMOVED'           : ('Local files deleted.'.green),
+        'REGISTRYREMOVE'         : ('Registeration removed.'.green),
+        'LOCALFILESMISSING'      : ('Local files missing.'.red),
+        'RUNNING'                : ('Running: %s'.green),
+        'TERMINATED'             : ('Terminated: %s'.yellow),
+        'INSTALLEDON'            : ('%s is installed on:'.green + ' %s'.cyan),
+        'LOCALUPDATED'           : ('Local repository updated.'.green)
+    }
 
     this.prepare = function (patt, vars, options) {
-        this.pattern   = patt
+        if (typeof this.preDefined[patt] != 'undefined')
+            this.pattern = this.preDefined[patt]
+        else
+            this.pattern = patt
+
         if (typeof vars == 'undefined')
             this.variables = []
         else

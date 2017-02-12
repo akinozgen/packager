@@ -8,11 +8,11 @@ var packageWhere = function (code, options) {
     if (packages[code])
     {
         var requested = packages[code]
-        out.prepare('%s is installed on:'.green + ' %s'.cyan, [requested.name, requested.installation_path])
+        out.prepare('INSTALLEDON', [requested.name, requested.installation_path])
     }
     else
     {
-        out.prepare("Warning:".yellow + " It is not installed.")
+        out.prepare('NOTINSTALLED')
     }
 
     out.out()
