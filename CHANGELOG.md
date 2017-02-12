@@ -1,3 +1,8 @@
+11.02.2017
+----------
+1. Bash script initialized
+2. We have registry issue.
+
 10.02.2017
 ----------
 1. Empty output line issue from output class solved.

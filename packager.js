@@ -79,7 +79,7 @@ program.command('link <code>')
 program.command('test <string>')
     .description('Test some things')
     .action(function (string, options) {
-        console.log(process.env)
+        
     })
 
 program.parse(process.argv)
