@@ -6,12 +6,12 @@ const url     = require('url')
 const pkg     = require('./package.json')
 
 // My Modules
-var installed = require('./modules/init')()
-const Output  = require('./modules/output')
-const run     = require('./modules/run')
-const link    = require('./modules/link')
-const search  = require('./modules/search')
-const Package = require('./modules/package')
+const installed = require('./modules/init')()
+const Output    = require('./modules/output')
+const run       = require('./modules/run')
+const link      = require('./modules/link')
+const search    = require('./modules/search')
+const Package   = require('./modules/package')
 const getVersions    = require('./modules/getVersions')
 const packageWhere   = require('./modules/packageWhere')
 const showPackages   = require('./modules/showPackages')
@@ -35,6 +35,7 @@ if (process.argv[2])
 // Constructing program
 program.version(pkg.version)
     .option('-t, --type <type>', 'Output Type (konsol or handler)', /^(konsol|handler)$/i, 'konsol')
+    .option('-c --category <category>', 'Select category for listing.', '')
 // Run command
 program.command('run <package_code>')
     .description('Run a package.')
@@ -60,7 +61,7 @@ program.command('where <package_code>')
     .description('Show specified package\'s installation directory.')
     .action(packageWhere)
 // Whats inside command
-program.command('whatsnew')
+program.command('get')
     .description('Show installable packages.')
     .action(showPackages)
 // Get versions command
@@ -79,7 +80,7 @@ program.command('link <code>')
 program.command('test <string>')
     .description('Test some things')
     .action(function (string, options) {
-        
+
     })
 
 program.parse(process.argv)

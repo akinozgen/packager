@@ -4,14 +4,16 @@ const easyTable    = require('easy-table')
 const progress     = require('progress')
 const jsonFile     = require('jsonfile')
 const Package      = require('./package')
+const SearchInJson  = require('./searchInJson')
 
 var search = function (string, options)
 {
 
-    var out  = new Output(options)
-    var found = {}
+    var category = options.parent.category
+    var out      = new Output(options)
+    var found    = {}
     var packages = jsonFile.readFileSync(process.env.PROGRAMS + '\\repository.json').packages
-    var len = Object.keys(packages).length
+    var len      = Object.keys(packages).length
 
     var progressBar = new progress('Searching in the repository [:bar] :percent :etas', {
         complete: '#',
@@ -23,7 +25,11 @@ var search = function (string, options)
     Object.keys(packages).forEach(function (key) {
         progressBar.tick(1)
         var package = new Package(key, 'remote', undefined, undefined, options)
+        var search  = new SearchInJson(package.categories, category)
         var searchIn = ('|' + key + package.name + '|' + package.provider + '|' + package.website + '|');
+
+        if (category != '' && ! search.getResult())
+            return false
 
         Object.keys(package.versions).forEach(function (ver) {
             searchIn += (package.versions[ver].description + '|')

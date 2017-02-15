@@ -5,7 +5,7 @@ var output = function (options)
     this.options    = {'timestamp':true}
     this.preDefined = {
         'PACKAGENOTFOUND'        : ('%s package not found.'.yellow),
-        'NOPACKAGEFOUND'         : ('Warning: '.yellow + 'No package found installed.'.cyan),
+        'NOPACKAGEFOUND'         : ('Warning: '.yellow + 'No package found.'.cyan),
         'PACKAGEFOUND'           : ('Package found. It will be install soon'.green),
         'NOVERSION'              : ('Not a version found of this package. It cant be install.'.yellow),
         'INSTALLED'              : ('This package allready installed.'.yellow),
