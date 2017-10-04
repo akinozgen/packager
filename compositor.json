@@ -1,0 +1,90 @@
+{
+  "name": "akinozgen/packager",
+  "version": "0.1.4",
+  "libraries": {
+    "xv": "^1.1.25"
+  },
+  "title": "",
+  "branch": "",
+  "style": {
+    "name": "Material",
+    "componentSet": {
+      "nav": "nav/DarkAbsoluteNav",
+      "header": "header/GradientHeader",
+      "article": "article/BasicArticle",
+      "footer": "footer/BasicFooter"
+    },
+    "fontFamily": "Roboto, sans-serif",
+    "heading": {
+      "fontWeight": 500,
+      "letterSpacing": "-0.01em"
+    },
+    "colors": {
+      "text": "#212121",
+      "background": "#fff",
+      "primary": "#2196f3",
+      "secondary": "#1565c0",
+      "highlight": "#ff4081",
+      "border": "#e0e0e0",
+      "muted": "#f5f5f5"
+    },
+    "layout": {
+      "centered": true,
+      "bannerHeight": "80vh",
+      "maxWidth": 896
+    }
+  },
+  "content": [
+    {
+      "component": "nav",
+      "links": [
+        {
+          "href": "https://github.com/akinozgen/packager",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://npmjs.com/package/packager",
+          "text": "npm"
+        }
+      ]
+    },
+    {
+      "component": "header",
+      "heading": "packager",
+      "subhead": "Apt style package manager for windows",
+      "children": [
+        {
+          "component": "ui/TweetButton",
+          "text": "packager: Apt style package manager for windows",
+          "url": ""
+        },
+        {
+          "component": "ui/GithubButton",
+          "user": "akinozgen",
+          "repo": "packager"
+        }
+      ],
+      "text": "v0.0.0"
+    },
+    {
+      "component": "article",
+      "metadata": {
+        "source": "github.readme"
+      },
+      "html": "<h1>Packager Windows Package Manager</h1>\n<p>Packager is a package manager app for windows built with nodejs and c#. You can manage open source software as package like GNU/Linux\nChangelog and news can be watch on twitter (@winpackager)</p>\n<p>You can check out CHANGELOG.md for changes. I&apos;ll be try announce all changes on twitter...</p>\n<h2>Actives</h2>\n<ol>\n<li>Run</li>\n<li>Remove</li>\n<li>List</li>\n<li>Install (w/ specified directory &amp; version)</li>\n<li>Where is</li>\n<li>View uninstalled packages</li>\n<li>List versions of specified package</li>\n<li>Update repository</li>\n<li>Run commands with URI strings (like packager://run/npp)</li>\n<li>Searh into repository</li>\n<li>Create desktop shortcut</li>\n</ol>\n<h2>Using</h2>\n<blockquote>\n<p>Attention: For the update and install, url string must be edited in updateRepositories.js. Server files included in /server directory...</p>\n</blockquote>\n<pre>  <span class=\"hljs-attribute\">Usage</span>: packager [options] [command]\n\n<span class=\"gauss\">\n  Commands:\n\n    <span class=\"hljs-keyword\">run</span> &lt;package_code&gt;                            <span class=\"hljs-keyword\">Run</span> a package.\n    update                                        Updates repository.\n    install &lt;package_code&gt; [version] [directory]  Install specified package. (&lt;necessary&gt; [unnecessary])\n    remove &lt;package_code&gt;                         Remove specified package.\n    list                                          List installed packages.\n    <span class=\"hljs-built_in\">where</span> &lt;package_code&gt;                          <span class=\"hljs-keyword\">Show</span> specified package&apos;s installation directory.\n    whatsnew                                      <span class=\"hljs-keyword\">Show</span> installable packages.\n    versions &lt;package_code&gt;                       Lists specified packages&apos;s versions <span class=\"hljs-keyword\">and</span> descriptions.\n    search &lt;<span class=\"hljs-keyword\">string</span>&gt;                               Searches in repository\n\n  Options:\n\n    -h, --help         <span class=\"hljs-keyword\">output</span> usage information\n    -V, --version      <span class=\"hljs-keyword\">output</span> the version number\n    -t, --<span class=\"hljs-built_in\">type</span> &lt;<span class=\"hljs-built_in\">type</span>&gt;  <span class=\"hljs-keyword\">Output</span> <span class=\"hljs-built_in\">Type</span> (konsol <span class=\"hljs-keyword\">or</span> handler)</span></pre><h1>Will Be Add In Future</h1>\n<ol>\n<li>Active Server (PHP)</li>\n<li>Make create, edit and delete registry enteries.</li>\n</ol>\n<h2>Demo Installing</h2>\n<p>Throw /server files to your virtual server directory or anywhere can be run as server root. Edit url string in updateRepositories.js file as your local server url. At first run may will necessary need to run as administrator for the first creation of directory and files.</p>\n"
+    },
+    {
+      "component": "footer",
+      "links": [
+        {
+          "href": "https://github.com/akinozgen/packager",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://github.com/akinozgen",
+          "text": "akinozgen"
+        }
+      ]
+    }
+  ]
+}
