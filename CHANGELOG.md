@@ -1,3 +1,5 @@
+# ABANDONED FOR A WHILE (OR PERMANENTLY)
+
 11.02.2017
 ----------
 1. Bash script initialized
