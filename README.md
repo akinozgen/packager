@@ -1,4 +1,4 @@
-Packager Windows Package Manager
+[discontinued] Packager Windows Package Manager
 =================================
 
 Packager is a package manager app for windows built with nodejs and c#. You can manage open source software as package like GNU/Linux
