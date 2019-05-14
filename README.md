@@ -1,10 +1,10 @@
 [discontinued] Packager Windows Package Manager
 =================================
 
-Packager is a package manager app for windows built with nodejs and c#. You can manage open source software as package like GNU/Linux
+Packager is a package manager app for windows built with nodejs and c#. You can manage open source software as package like GNU/Linux.
 Changelog and news can be watch on twitter (@winpackager)
 
-You can check out CHANGELOG.md for changes. I'll be try announce all changes on twitter...
+You can check out CHANGELOG.md for changes. 
 
 Actives
 -------
@@ -55,4 +55,4 @@ Will Be Add In Future
 
 Demo Installing
 ---------------
-Throw /server files to your virtual server directory or anywhere can be run as server root. Edit url string in updateRepositories.js file as your local server url. At first run may will necessary need to run as administrator for the first creation of directory and files.
+Put /server files to your virtual server directory or anywhere can be run as server root. Edit url string in updateRepositories.js file as your local server url. At first run may will necessary need to run as administrator for the first creation of directory and files.
